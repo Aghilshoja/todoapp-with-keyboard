@@ -1,0 +1,123 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* body layout */
+  --body-font-family: Arial, Helvetica, sans-serif;
+  /* header layout */
+  --header-background-color: #21a99a;
+  --header-color: #f8fafc;
+  --header-padding: 0.6rem;
+  /* main el layout */
+  --main-height: calc(100vh - 60px);
+  /* task input layout */
+  --task-input-padding: 0.5rem;
+  --task-input-border: none;
+  /* submit task */
+  --submit-task-padding: 0.8rem;
+  --submit-task-radius: 50%;
+  --submit-task-background-color: rgba(70, 131, 180, 0.741);
+  --submit-task-color: white;
+  --submit-task-cursor: pointer;
+  --submit-task-font-size: 1.4rem;
+  /* task item layout */
+  --task-item-margin: 0.5rem 1rem 0.5rem 1rem;
+  --task-item-padding: 1rem;
+  --task-item-background-color: #68a6a1;
+  --task-item-color: #f9fafb;
+  --task-item-radius: 20px;
+}
+
+body {
+  font-family: var(--body-font-family);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--header-background-color);
+  color: var(--header-color);
+  height: 60px;
+  padding: 0.6rem;
+}
+
+.dark-mode-icon,
+.search-icon,
+.ellipsis-icon {
+  border: var(--task-input-border);
+  margin-inline: 0.5rem;
+  background: var(--task-input-border);
+  color: inherit;
+  font-size: var(--submit-task-font-size);
+  cursor: var(--submit-task-cursor);
+}
+
+main {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: var(--main-height); /* main area fills viewport minus header height */
+}
+
+/* Visually hidden for accessibility (screen readers) */
+
+.h2,
+.hidden-label {
+  position: absolute;
+  left: -1000px;
+}
+
+.form-styling {
+  display: flex;
+}
+
+.task-input {
+  flex-grow: 1;
+  border-left: var(--task-input-border);
+  border-top: var(--task-input-border);
+  border-right: var(--task-input-border);
+  padding: var(--task-input-padding);
+  margin-bottom: 0.4rem;
+  font-size: 1rem;
+}
+
+.submit--task {
+  border: var(--task-input-border);
+  position: absolute;
+  right: 20px;
+  bottom: 50px;
+  padding: var(--submit-task-padding);
+  border-radius: var(--submit-task-radius);
+  background-color: var(--submit-task-background-color);
+  color: var(--submit-task-color);
+  cursor: var(--submit-task-cursor);
+}
+
+.tasks-holder {
+  height: 50vh;
+  overflow: auto;
+}
+
+/*  each task */
+.task-item {
+  background-color: var(--task-item-background-color);
+  color: var(--task-item-color);
+  padding: var(--task-item-padding);
+  margin: var(--task-item-margin);
+  list-style: var(--task-input-border);
+  border-radius: var(--task-item-radius);
+}
+
+.no-task-added {
+  background-color: antiquewhite;
+  margin: 6rem 4rem 2rem 4rem;
+  list-style: none;
+  padding: 0.5rem;
+  color: black;
+  border-radius: 20px;
+  text-align: center;
+}
