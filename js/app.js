@@ -18,6 +18,23 @@ import "./completed-mode.js";
 
 const taskManager = new toDoApp();
 
+const saveTasks = () => {
+  const savedTasks = taskManager.getTasks();
+  localStorage.setItem("todo", JSON.stringify(savedTasks));
+};
+
+const loadTasks = () => {
+  try {
+    const loadedTasks = JSON.parse(localStorage.getItem("todo"));
+    if (Array.isArray(loadedTasks)) taskManager.setTask(loadedTasks);
+  } catch (error) {
+    console.log("catch the error", error);
+  }
+  renderTasks();
+};
+
+document.addEventListener("DOMContentLoaded", loadTasks);
+
 export const stateOfEdited = {
   isEdited: null,
 };
@@ -41,6 +58,7 @@ export const renderTasks = () => {
     return;
   }
   sortedTask.forEach((task) => taskList.prepend(createTaskElement(task)));
+  saveTasks();
 };
 
 const toggleAndClearTasks = () => {
@@ -131,4 +149,3 @@ document.body.addEventListener("click", (e) => {
     return;
   }
 });
-renderTasks();
