@@ -109,7 +109,7 @@ export const createTaskElement = (task) => {
   eachTask.setAttribute("title", "click on the task to see more options");
   eachTask.dataset.id = task.id;
   eachTask.setAttribute("draggable", "true");
-  if (task.isCompleted) eachTask.classList.add("task-done");
+  if (task.isCompleted) eachTask.classList.add("task-item--done");
 
   const timeStamp = document.createElement("p");
   timeStamp.classList.add("task-item__timestamp");

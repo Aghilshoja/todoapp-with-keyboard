@@ -237,3 +237,7 @@ main {
 .action-buttons__show-check-mark {
   display: block;
 }
+
+.task-item--done {
+  text-decoration: line-through black;
+}
