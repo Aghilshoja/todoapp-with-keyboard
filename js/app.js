@@ -6,10 +6,12 @@ import { resetCounters } from "./reset-counters.js";
 import { updateTaskCounter } from "./count-individual-task.js";
 import { clearAllTasks } from "./clear-all-tasks.js";
 import { countTotalTasks } from "./count-total-tasks.js";
+import { displayCopiedFeedback } from "./copied-visual-feedback.js";
 import "./add-task.js";
 import "./get-tasks.js";
 import "./delete-mode.js";
 import "./set-tasks.js";
+import "./copy-mode.js";
 
 const taskManager = new toDoApp();
 
@@ -80,6 +82,18 @@ document.body.addEventListener("click", (e) => {
   }
   if (e.target.closest(".toolbar__clear-all-tasks")) {
     toggleAndClearTasks();
+    return;
+  }
+  if (e.target.closest(".action-buttons__handle-copy")) {
+    const taskId = Number(
+      e.target.closest(".action-buttons__handle-copy").dataset.id
+    );
+    const taskToCopy = taskManager.handleCopyTask(taskId);
+    if (taskToCopy) displayCopiedFeedback(e, taskToCopy);
+    setTimeout(() => {
+      hideToolbar();
+    }, 2000);
+    return;
   }
   if (e.target.closest(".task-item")) {
     updateTaskCounter(e);
