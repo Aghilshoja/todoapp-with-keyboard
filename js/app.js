@@ -11,11 +11,16 @@ import "./add-task.js";
 import "./get-tasks.js";
 import "./delete-mode.js";
 import "./set-tasks.js";
+import "./edit-mode.js";
 import "./copy-mode.js";
 
 const taskManager = new toDoApp();
 
-export const isTasksClearedOrCounted = {
+export const stateOfEdited = {
+  isEdited: null,
+};
+
+export let isTasksClearedOrCounted = {
   state: false,
 };
 const taskInput = document.querySelector(".form-section__task-input");
@@ -98,6 +103,17 @@ document.body.addEventListener("click", (e) => {
   if (e.target.closest(".task-item")) {
     updateTaskCounter(e);
     showToolbar(e);
+  }
+  if (e.target.closest(".action-buttons__handle-edit")) {
+    const taskId = Number(
+      e.target.closest(".action-buttons__handle-edit").dataset.id
+    );
+    const taskToEdit = taskManager.handleEditTask(taskId);
+    if (taskToEdit) {
+      const cleanedText = taskToEdit.text.replace(/\s*\(edited\)$/, "");
+      taskInput.value = cleanedText;
+    }
+    stateOfEdited.isEdited = taskId;
   }
 });
 renderTasks();
