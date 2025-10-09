@@ -233,3 +233,7 @@ main {
 .task-item--mark-all-tasks {
   background-color: #a1b9b7;
 }
+
+.action-buttons__show-check-mark {
+  display: block;
+}
