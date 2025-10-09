@@ -23,47 +23,57 @@
 
   <body>
     <header class="header main-header">
-      <h1>Smart To Do</h1>
-      <div class="diff-modes">
+      <h1 class="header__title">Smart To Do</h1>
+
+      <div class="header__actions">
         <button
-          class="fa-solid fa-circle-half-stroke dark-mode-icon"
-          aria-label="dark mode"
+          class="fa-solid fa-circle-half-stroke header__dark-mode-btn"
+          aria-label="Toggle dark mode"
         ></button>
         <button
-          class="fa-solid fa-magnifying-glass search-icon"
-          aria-label="click on the search icon and search for something"
+          class="fa-solid fa-magnifying-glass header__search-btn"
+          aria-label="Search tasks"
         ></button>
         <button
-          class="fa-solid fa-ellipsis-vertical ellipsis-icon"
-          aria-label="click on ellipsis to see more items"
+          class="fa-solid fa-ellipsis-vertical header__more-btns"
+          aria-label="More options"
         ></button>
       </div>
     </header>
 
     <main>
+      <section class="toolbar">
+        <h2 class="toolbar__action-btns">
+          perform deletion, counting tasks while deleting them
+        </h2>
+        <button class="toolbar__count-individual-task"></button>
+        <button class="toolbar__count-total-tasks"></button>
+        <button class="toolbar__clear-all-tasks">
+          <i class="fa-solid fa-broom"></i>
+        </button>
+      </section>
       <section class="to-do-app">
-        <h2 class="h2">your tasks</h2>
-        <ul class="tasks-holder"></ul>
+        <h2 class="to-do-app__section-title">your tasks</h2>
+        <ul class="to-do-app__tasks-holder"></ul>
       </section>
       <section class="input-field">
-        <h2 class="h2">input fields to enter tasks</h2>
-        <div class="hide-error"></div>
-        <form class="form-styling">
-          <label for="users-input" class="hidden-label"
+        <h2 class="input-field__section-title">input fields to enter tasks</h2>
+        <div class="input-field__hide-error"></div>
+        <form class="form-section">
+          <label for="users-input" class="form-section__hidden-label"
             >enter a task in input field</label
           >
           <input
             type="text"
             id="users-input"
-            class="task-input"
+            class="form-section__task-input"
             placeholder="enter a task"
             autocomplete="on"
             minlength="5"
-            autocorrect="on"
             autofocus
             required
           />
-          <button class="submit--task">
+          <button class="form-section__submit-task">
             <i class="fa-solid fa-paper-plane"></i>
           </button>
         </form>
