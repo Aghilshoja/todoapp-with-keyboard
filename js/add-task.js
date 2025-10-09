@@ -9,6 +9,7 @@ toDoApp.prototype.addTask = function (text) {
       hour: "2-digit",
       minute: "2-digit",
     }),
+    isCompleted: false,
   };
   if (stateOfEdited.isEdited) {
     const matchedTask = this.task.find(

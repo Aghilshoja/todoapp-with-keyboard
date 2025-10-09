@@ -1,18 +1,20 @@
 import { toDoApp } from "./app-state.js";
-import { createTaskElement } from "./dreate-ui.js";
+import { createTaskElement } from "./build-UI.js";
 import { showToolbar } from "./show-toolbar.js";
-import { hideToolbar } from "./hide-ttolbar.js";
+import { hideToolbar } from "./hide-toolbar.js";
 import { resetCounters } from "./reset-counters.js";
 import { updateTaskCounter } from "./count-individual-task.js";
 import { clearAllTasks } from "./clear-all-tasks.js";
 import { countTotalTasks } from "./count-total-tasks.js";
 import { displayVisualFeedback } from "./copid-visual-feedback.js";
+import { toggleTaskCompletion } from "./toggle-completion.js";
 import "./add-task.js";
 import "./get-tasks.js";
 import "./delete-mode.js";
 import "./set-tasks.js";
 import "./edit-mode.js";
 import "./copy-mode.js";
+import "./completed-mode.js";
 
 const taskManager = new toDoApp();
 
@@ -28,13 +30,17 @@ const taskList = document.querySelector(".to-do-app__tasks-holder");
 
 export const renderTasks = () => {
   taskList.textContent = "";
+
   const tasks = taskManager.getTasks();
+  const sortedTask = [...tasks].sort((a, b) => {
+    return b.isCompleted - a.isCompleted;
+  });
   if (!tasks) return;
   if (tasks.length === 0) {
     taskList.innerHTML = `<li class="no-task-added">No tasks added</li>`;
     return;
   }
-  tasks.forEach((task) => taskList.prepend(createTaskElement(task)));
+  sortedTask.forEach((task) => taskList.prepend(createTaskElement(task)));
 };
 
 const toggleAndClearTasks = () => {
@@ -91,6 +97,16 @@ document.body.addEventListener("click", (e) => {
   if (e.target.closest(".task-item")) {
     updateTaskCounter(e);
     showToolbar(e);
+  }
+  if (e.target.closest(".wrapper__is-completed")) {
+    const taskId = Number(
+      e.target.closest(".wrapper__is-completed").dataset.id
+    );
+    const completedTask = taskManager.handleCompletedTask(taskId);
+    if (completedTask) toggleTaskCompletion(e, completedTask);
+    renderTasks();
+    hideToolbar();
+    return;
   }
   if (e.target.closest(".action-buttons__handle-edit")) {
     const taskId = Number(
