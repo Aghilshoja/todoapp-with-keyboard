@@ -6,11 +6,13 @@ import { resetCounters } from "./reset-counters.js";
 import { updateTaskCounter } from "./count-individual-task.js";
 import { clearAllTasks } from "./clear-all-tasks.js";
 import { countTotalTasks } from "./count-total-tasks.js";
+import { displayVisualFeedback } from "./copid-visual-feedback.js";
 import "./add-task.js";
 import "./get-tasks.js";
 import "./delete-mode.js";
 import "./set-tasks.js";
 import "./edit-mode.js";
+import "./copy-mode.js";
 
 const taskManager = new toDoApp();
 
@@ -100,6 +102,17 @@ document.body.addEventListener("click", (e) => {
       taskInput.value = cleanedText;
     }
     stateOfEdited.isEdited = taskId;
+  }
+  if (e.target.closest(".action-buttons__handle-copy")) {
+    const taskId = Number(
+      e.target.closest(".action-buttons__handle-copy").dataset.id
+    );
+    const taskTocopy = taskManager.handleCopyTask(taskId);
+    if (taskTocopy) displayVisualFeedback(e, taskTocopy);
+    setTimeout(() => {
+      hideToolbar();
+    }, 2000);
+    return;
   }
 });
 renderTasks();
