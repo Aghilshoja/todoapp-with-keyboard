@@ -33,7 +33,17 @@ const loadTasks = () => {
   renderTasks();
 };
 
-document.addEventListener("DOMContentLoaded", loadTasks);
+const loadDarkMode = () => {
+  const savedDarkMode = JSON.parse(localStorage.getItem("todo"));
+  if (savedDarkMode) {
+    document.body.classList.add("dark-mode");
+  }
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadTasks();
+  loadDarkMode();
+});
 
 export const stateOfEdited = {
   isEdited: null,
@@ -43,7 +53,7 @@ export let isTasksClearedOrCounted = {
   state: false,
 };
 const taskInput = document.querySelector(".form-section__task-input");
-const taskList = document.querySelector(".to-do-app__tasks-holder");
+const taskList = document.querySelector(".todo__tasks-holder");
 
 export const renderTasks = () => {
   taskList.textContent = "";
@@ -147,5 +157,13 @@ document.body.addEventListener("click", (e) => {
       hideToolbar();
     }, 2000);
     return;
+  }
+  if (e.target.closest(".header__dark-mode-btn")) {
+    document.body.classList.toggle("dark-mode");
+    const darkModeBtn = document.querySelector(".header__dark-mode-btn");
+    darkModeBtn?.removeAttribute("aria-hidden");
+
+    const darkMode = document.body.classList.contains("dark-mode");
+    localStorage.setItem("todo", JSON.stringify(darkMode));
   }
 });

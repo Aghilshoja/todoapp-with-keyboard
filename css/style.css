@@ -8,6 +8,7 @@
   /* === colors === */
   --primary-color: #f9fafb;
   --primary-bg: #f9fafb;
+  --black-color: black;
   /* == bordes == */
   --border-none: none;
   /*== fonts ==*/
@@ -65,7 +66,7 @@ main {
   height: var(--main-height); /* main area fills viewport minus header height */
 } /* Visually hidden for accessibility (screen readers) */
 
-.to-do-app__section-title,
+.todo__section-title,
 .input-field__section-title,
 .form-section__hidden-label,
 .toolbar__action-btns {
@@ -97,9 +98,10 @@ main {
   cursor: pointer;
 }
 
-.to-do-app__tasks-holder {
+.todo__tasks-holder {
   height: 50vh;
   overflow: auto;
+  list-style: none;
 }
 /* each task */
 .task-item {
@@ -116,7 +118,7 @@ main {
   margin: 6rem 4rem 2rem 4rem;
   list-style: none;
   padding: 0.4rem;
-  color: black;
+  color: var(--black-color);
   border-radius: 20px;
   text-align: center;
 }
@@ -239,5 +241,9 @@ main {
 }
 
 .task-item--done {
-  text-decoration: line-through black;
+  text-decoration: line-through var(--black-color);
+}
+
+.dark-mode {
+  background-color: var(--black-color);
 }
