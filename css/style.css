@@ -42,6 +42,9 @@ body {
   justify-content: space-between;
   flex: 1 1 auto;
   align-items: center;
+}
+
+.header--design {
   background-color: var(--header-background-color);
   color: var(--primary-color);
   height: 60px;
@@ -66,6 +69,7 @@ main {
   height: var(--main-height); /* main area fills viewport minus header height */
 } /* Visually hidden for accessibility (screen readers) */
 
+/* Accessibility: visually hidden elements */
 .todo__section-title,
 .input-field__section-title,
 .form-section__hidden-label,
@@ -98,6 +102,7 @@ main {
   cursor: pointer;
 }
 
+/* make the tasks scrollable when their their height is 50 vh */
 .todo__tasks-holder {
   height: 50vh;
   overflow: auto;
@@ -113,7 +118,8 @@ main {
   border-radius: var(--task-item-radius);
 }
 
-.no-task-added {
+.no-task-added,
+.no-searched-tasks {
   background-color: antiquewhite;
   margin: 6rem 4rem 2rem 4rem;
   list-style: none;
@@ -147,7 +153,8 @@ main {
 .wrapper__ellipsis-icon,
 .toolbar__count-individual-task,
 .toolbar__clear-all-tasks,
-.toolbar__count-total-tasks {
+.toolbar__count-total-tasks,
+.header__back-arrow {
   background: var(--background-none);
   color: inherit;
   border: var(--border-none);
@@ -241,9 +248,35 @@ main {
 }
 
 .task-item--done {
-  text-decoration: line-through var(--black-color);
+  text-decoration: line-through;
 }
 
 .dark-mode {
   background-color: var(--black-color);
+}
+
+.header__clear-value {
+  display: none;
+}
+
+.header__search-mode {
+  display: flex;
+  column-gap: 0.3rem;
+  margin-top: 0.5rem;
+}
+
+.header__search-box {
+  flex-grow: 1;
+  padding: 0.3rem;
+  border-radius: 20px;
+}
+
+.header__show-clear-value {
+  display: block;
+  position: fixed;
+  right: 20px;
+  top: 22px;
+  border: var(--border-none);
+  background: var(--background-none);
+  cursor: pointer;
 }

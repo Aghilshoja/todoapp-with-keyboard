@@ -8,6 +8,7 @@ import { clearAllTasks } from "./clear-all-tasks.js";
 import { countTotalTasks } from "./count-total-tasks.js";
 import { displayVisualFeedback } from "./copid-visual-feedback.js";
 import { toggleTaskCompletion } from "./toggle-completion.js";
+import { replaceHeaderWithSearch } from "./replace-header-with-search.js";
 import "./add-task.js";
 import "./get-tasks.js";
 import "./delete-mode.js";
@@ -15,8 +16,11 @@ import "./set-tasks.js";
 import "./edit-mode.js";
 import "./copy-mode.js";
 import "./completed-mode.js";
+import "./search-mode.js";
 
-const taskManager = new toDoApp();
+export const taskManager = new toDoApp();
+
+const taskList = document.querySelector(".todo__tasks-holder");
 
 const saveTasks = () => {
   const savedTasks = taskManager.getTasks();
@@ -34,8 +38,8 @@ const loadTasks = () => {
 };
 
 const loadDarkMode = () => {
-  const savedDarkMode = JSON.parse(localStorage.getItem("todo"));
-  if (savedDarkMode) {
+  const savedDarkMode = JSON.parse(localStorage.getItem("darkMode"));
+  if (savedDarkMode === true) {
     document.body.classList.add("dark-mode");
   }
 };
@@ -53,18 +57,18 @@ export let isTasksClearedOrCounted = {
   state: false,
 };
 const taskInput = document.querySelector(".form-section__task-input");
-const taskList = document.querySelector(".todo__tasks-holder");
 
-export const renderTasks = () => {
+export const renderTasks = (filteredTasks) => {
   taskList.textContent = "";
 
-  const tasks = taskManager.getTasks();
+  const tasks = filteredTasks || taskManager.getTasks();
   const sortedTask = [...tasks].sort((a, b) => {
     return b.isCompleted - a.isCompleted;
   });
   if (!tasks) return;
   if (tasks.length === 0) {
     taskList.innerHTML = `<li class="no-task-added">No tasks added</li>`;
+    saveTasks();
     return;
   }
   sortedTask.forEach((task) => taskList.prepend(createTaskElement(task)));
@@ -134,6 +138,7 @@ document.body.addEventListener("click", (e) => {
     if (completedTask) toggleTaskCompletion(e, completedTask);
     renderTasks();
     hideToolbar();
+    resetCounters();
     return;
   }
   if (e.target.closest(".action-buttons__handle-edit")) {
@@ -164,6 +169,15 @@ document.body.addEventListener("click", (e) => {
     darkModeBtn?.removeAttribute("aria-hidden");
 
     const darkMode = document.body.classList.contains("dark-mode");
-    localStorage.setItem("todo", JSON.stringify(darkMode));
+    localStorage.setItem("darkMode", JSON.stringify(darkMode));
+  }
+  if (e.target.closest(".header__search-btn")) {
+    replaceHeaderWithSearch();
+    return;
+  }
+  if (e.target.closest(".header__back-arrow")) {
+    replaceHeaderWithSearch();
+    hideToolbar();
+    return;
   }
 });

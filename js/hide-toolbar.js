@@ -1,4 +1,6 @@
-const createHeader = () => `
+import { isSearchHidden } from "./replace-header-with-search.js";
+
+export const createHeader = () => `
   <h1 class="header__title">Smart To Do</h1>
 
   <div class="header__actions">
@@ -26,10 +28,12 @@ export const hideToolbar = () => {
     selectedTask.classList.remove("task-item--selected");
   });
 
-  const header = document.querySelector(".header");
+  const header =
+    document.querySelector(".header") ||
+    document.querySelector(".header--design");
   if (header) {
     header.innerHTML = createHeader();
-    header.classList.remove("padding-for-header");
+    header.classList.add("header");
     const getModes = document
       .querySelectorAll(".action-buttons")
       .forEach((hide) => {
@@ -41,4 +45,6 @@ export const hideToolbar = () => {
   taskItems.forEach((task) => {
     task.classList.remove("task-item--mark-all-tasks");
   });
+
+  isSearchHidden.state = false;
 };
