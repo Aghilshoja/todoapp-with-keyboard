@@ -9,6 +9,7 @@ import { countTotalTasks } from "./count-total-tasks.js";
 import { displayVisualFeedback } from "./copid-visual-feedback.js";
 import { toggleTaskCompletion } from "./toggle-completion.js";
 import { replaceHeaderWithSearch } from "./replace-header-with-search.js";
+import { toggleDropDownList } from "./dropdown-list.js";
 import "./add-task.js";
 import "./get-tasks.js";
 import "./delete-mode.js";
@@ -92,7 +93,15 @@ const toggleAndClearTasks = () => {
   isTasksClearedOrCounted.state = !isTasksClearedOrCounted.state;
 };
 
+document.body.addEventListener("click", (e) =>
+  e.target.classList.remove("dropdown-list--render")
+);
+
 document.body.addEventListener("click", (e) => {
+  const dropdownList = document.querySelector(".dropdown-list");
+  if (dropdownList) {
+    dropdownList.classList.remove("dropdown-list--render");
+  }
   if (e.target.closest(".form-section__submit-task")) {
     const value = taskInput.value.trim();
     if (!value) return;
@@ -178,6 +187,10 @@ document.body.addEventListener("click", (e) => {
   if (e.target.closest(".header__back-arrow")) {
     replaceHeaderWithSearch();
     hideToolbar();
+    renderTasks();
     return;
+  }
+  if (e.target.closest(".header__more-btns")) {
+    toggleDropDownList();
   }
 });

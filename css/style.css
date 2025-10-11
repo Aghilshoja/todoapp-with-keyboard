@@ -255,7 +255,8 @@ main {
   background-color: var(--black-color);
 }
 
-.header__clear-value {
+.header__clear-value,
+.dropdown-list {
   display: none;
 }
 
@@ -278,5 +279,32 @@ main {
   top: 22px;
   border: var(--border-none);
   background: var(--background-none);
+  cursor: pointer;
+}
+
+.header__more-btns {
+  position: relative;
+}
+
+.dropdown-list--render {
+  display: block;
+  position: absolute;
+  background-color: #21a99a;
+  top: 58px;
+  right: 10px;
+}
+
+.dropdown-list__all-tasks,
+.dropdown-list__completed-tasks,
+.dropdown-list__edited-tasks {
+  padding: 1rem;
+  list-style: none;
+  color: var(--primary-color);
+}
+
+.dropdown-list__all-tasks:hover,
+.dropdown-list__completed-tasks:hover,
+.dropdown-list__edited-tasks:hover {
+  background-color: rgba(128, 128, 128, 0.514);
   cursor: pointer;
 }

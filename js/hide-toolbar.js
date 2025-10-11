@@ -46,5 +46,7 @@ export const hideToolbar = () => {
     task.classList.remove("task-item--mark-all-tasks");
   });
 
+  /* Reset the search mode toggle flag to false to restore normal click behavior after back arrow is clicked */
+
   isSearchHidden.state = false;
 };
