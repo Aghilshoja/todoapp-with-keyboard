@@ -199,4 +199,7 @@ document.body.addEventListener("click", (e) => {
   if (e.target.classList.contains("dropdown-list__completed-tasks")) {
     renderCompletedTasks();
   }
+  if (e.target.classList.contains("dropdown-list__all-tasks")) {
+    renderTasks();
+  }
 });
