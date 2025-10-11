@@ -10,6 +10,7 @@ import { displayVisualFeedback } from "./copid-visual-feedback.js";
 import { toggleTaskCompletion } from "./toggle-completion.js";
 import { replaceHeaderWithSearch } from "./replace-header-with-search.js";
 import { toggleDropDownList } from "./dropdown-list.js";
+import { filterAndRender } from "./filter-completed-tasks.js";
 import "./add-task.js";
 import "./get-tasks.js";
 import "./delete-mode.js";
@@ -18,6 +19,7 @@ import "./edit-mode.js";
 import "./copy-mode.js";
 import "./completed-mode.js";
 import "./search-mode.js";
+import "./show-completed-tasks-mode.js";
 
 export const taskManager = new toDoApp();
 
@@ -93,9 +95,8 @@ const toggleAndClearTasks = () => {
   isTasksClearedOrCounted.state = !isTasksClearedOrCounted.state;
 };
 
-document.body.addEventListener("click", (e) =>
-  e.target.classList.remove("dropdown-list--render")
-);
+const renderCompletedTasks = () =>
+  filterAndRender((t) => t.isCompleted, "no completed tasks found");
 
 document.body.addEventListener("click", (e) => {
   const dropdownList = document.querySelector(".dropdown-list");
@@ -191,6 +192,11 @@ document.body.addEventListener("click", (e) => {
     return;
   }
   if (e.target.closest(".header__more-btns")) {
+    const ellipsis = document.querySelector(".header__more-btns");
+    ellipsis?.removeAttribute("aria-hidden");
     toggleDropDownList();
+  }
+  if (e.target.classList.contains("dropdown-list__completed-tasks")) {
+    renderCompletedTasks();
   }
 });
