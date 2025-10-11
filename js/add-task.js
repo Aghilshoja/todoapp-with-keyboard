@@ -10,6 +10,7 @@ toDoApp.prototype.addTask = function (text) {
       minute: "2-digit",
     }),
     isCompleted: false,
+    showEditedTasks: false,
   };
   if (stateOfEdited.isEdited) {
     const matchedTask = this.task.find(
@@ -20,6 +21,4 @@ toDoApp.prototype.addTask = function (text) {
   } else {
     this.task.push(newTask);
   }
-
-  return newTask;
 };

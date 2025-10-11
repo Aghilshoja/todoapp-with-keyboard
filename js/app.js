@@ -98,6 +98,12 @@ const toggleAndClearTasks = () => {
 const renderCompletedTasks = () =>
   filterAndRender((t) => t.isCompleted, "no completed tasks found");
 
+const showEditedTasks = () =>
+  filterAndRender(
+    (editedTasks) => editedTasks.showEditedTasks,
+    "no edited tasks found"
+  );
+
 document.body.addEventListener("click", (e) => {
   const dropdownList = document.querySelector(".dropdown-list");
   if (dropdownList) {
@@ -159,6 +165,7 @@ document.body.addEventListener("click", (e) => {
     if (taskToEdit) {
       const cleanedText = taskToEdit.text.replace(/\s*\(edited\)$/, "");
       taskInput.value = cleanedText;
+      taskToEdit.showEditedTasks = !taskToEdit.showEditedTasks;
     }
     stateOfEdited.isEdited = taskId;
   }
@@ -201,5 +208,8 @@ document.body.addEventListener("click", (e) => {
   }
   if (e.target.classList.contains("dropdown-list__all-tasks")) {
     renderTasks();
+  }
+  if (e.target.classList.contains("dropdown-list__edited-tasks")) {
+    showEditedTasks();
   }
 });
