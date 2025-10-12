@@ -11,6 +11,12 @@ import { toggleTaskCompletion } from "./toggle-completion.js";
 import { replaceHeaderWithSearch } from "./replace-header-with-search.js";
 import { toggleDropDownList } from "./dropdown-list.js";
 import { filterAndRender } from "./filter-completed-tasks.js";
+import { dragStart } from "./drag-start.js";
+import { dragOver } from "./drag-over.js";
+import { dropTarget } from "./drop-target.js";
+import { draggedEnter } from "./drag-enter.js";
+import { draggedEndTask } from "./draggend.js";
+import { draggedLeave } from "./dragged-leave.js";
 import "./add-task.js";
 import "./get-tasks.js";
 import "./delete-mode.js";
@@ -104,6 +110,13 @@ const showEditedTasks = () =>
     "no edited tasks found"
   );
 
+taskList.addEventListener("dragstart", (e) => dragStart(e));
+taskList.addEventListener("dragover", (e) => dragOver(e));
+taskList.addEventListener("dragenter", (e) => draggedEnter(e));
+taskList.addEventListener("dragleave", (e) => draggedLeave(e));
+taskList.addEventListener("drop", (e) => dropTarget(e));
+taskList.addEventListener("dragend", (e) => draggedEndTask(e));
+
 document.body.addEventListener("click", (e) => {
   const dropdownList = document.querySelector(".dropdown-list");
   if (dropdownList) {
@@ -165,6 +178,7 @@ document.body.addEventListener("click", (e) => {
     if (taskToEdit) {
       const cleanedText = taskToEdit.text.replace(/\s*\(edited\)$/, "");
       taskInput.value = cleanedText;
+      /* flip flag of the edited tasks to true so that we can find all of the edited tasks */
       taskToEdit.showEditedTasks = !taskToEdit.showEditedTasks;
     }
     stateOfEdited.isEdited = taskId;

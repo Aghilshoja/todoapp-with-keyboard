@@ -17,6 +17,8 @@ toDoApp.prototype.addTask = function (text) {
       (edit) => edit.id === stateOfEdited.isEdited
     );
     if (matchedTask) matchedTask.text = text + " (edited)";
+
+    // exit edit mode
     stateOfEdited.isEdited = null;
   } else {
     this.task.push(newTask);
