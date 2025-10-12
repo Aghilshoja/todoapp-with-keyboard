@@ -7,10 +7,10 @@ export const clearAllTasks = (tasks) => {
     ".toolbar__count-total-tasks"
   );
   if (!totalTasksCounter) return;
+  totalTasksCounter.textContent = "";
 
   if (tasksId.length > 0) {
     tasks = tasks.filter((task) => !tasksId.includes(task.id));
-    totalTasksCounter.textContent = "";
   }
   const markedTasks = document.querySelectorAll(".task-item");
 

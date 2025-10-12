@@ -11,7 +11,5 @@ export const resetCounters = () => {
   const taskCounter = document.querySelector(".toolbar__count-total-tasks");
   if (!taskCounter) return;
 
-  const taskItems = document.querySelectorAll(".task-item");
-
   taskCounter.textContent = "";
 };
