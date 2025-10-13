@@ -15,10 +15,10 @@
 
     <title>Virtul KeyBoard with To-Do list</title>
     <link rel="stylesheet" href="/css/style.css" />
-    <script
+     <script
       src="https://kit.fontawesome.com/713b912148.js"
       crossorigin="anonymous"
-    ></script>
+    ></script> 
   </head>
 
   <body>
@@ -63,6 +63,7 @@
         <h2 class="todo__section-title">your tasks</h2>
         <ul class="todo__tasks-holder"></ul>
       </section>
+      <div> 
       <section class="input-field">
         <h2 class="input-field__section-title">input fields to enter tasks</h2>
         <div class="input-field__hide-error"></div>
@@ -85,7 +86,15 @@
           </button>
         </form>
       </section>
+        <section class="virtual-keyboard">
+          <h2 class="virtual-keyboard__header">
+            submit your tasks with our smart virtual keyboard
+          </h1>
+          <div class="virtual-keyboard__container"></div>
+        </section>
+      </div> 
     </main>
     <script type="module" src="/js/app.js"></script>
+    <script type="module" src="/keyboard-js/app.js"></script>
   </body>
 </html>
