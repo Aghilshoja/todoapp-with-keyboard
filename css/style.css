@@ -358,6 +358,20 @@ main {
   flex-grow: 2;
 }
 
+@media only screen and (max-width: 390px) {
+  .virtual-keyboard__container__regular-buttons,
+  .virtual-keyboard__container__persian,
+  .virtual-keyboard__container__space-button,
+  .virtual-keyboard__container__arrow-key,
+  .virtual-keyboard__container__delete-key,
+  .virtual-keyboard__container__submit-button,
+  .virtual-keyboard__container__symbol-switcher,
+  .virtual-keyboard__container__english {
+    font-size: 1rem;
+    padding: 0.4rem;
+  }
+}
+
 @media only screen and (min-width: 1201px) {
   .virtual-keyboard__container {
     display: none;
