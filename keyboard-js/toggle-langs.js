@@ -1,7 +1,7 @@
 /* import { keyboardManager } from "./app.js"; */
 import { createElement } from "./build-ui.js";
+import { attachListener } from "./show-keyboard-in-input.js";
 
-/* const langs = keyboardManager.getCharacters(); */
 export const toggleLangs = (langs) => {
   const keyboardContainer = document.querySelector(
     ".virtual-keyboard__container"
@@ -18,4 +18,5 @@ export const toggleLangs = (langs) => {
     });
     keyboardContainer.appendChild(eachRow);
   });
+  attachListener();
 };
