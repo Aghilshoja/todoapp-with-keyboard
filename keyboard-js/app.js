@@ -41,4 +41,7 @@ document.body.addEventListener("click", (e) => {
     hideToolbar();
     return;
   }
+  if (e.target.classList.contains("virtual-keyboard__container__delete-key")) {
+    taskInput.value = taskInput.value.slice(0, -1);
+  }
 });
