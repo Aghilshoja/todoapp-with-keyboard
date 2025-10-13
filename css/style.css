@@ -88,6 +88,7 @@ main {
   border-bottom: solid;
   padding: var(--task-input-padding);
   margin-bottom: 0.4rem;
+  font-size: 1.6rem;
 }
 
 .form-section__submit-task {
@@ -341,7 +342,8 @@ main {
 .virtual-keyboard__container__persian,
 .virtual-keyboard__container__space-button,
 .virtual-keyboard__container__submit-button,
-.virtual-keyboard__container__symbol-switcher {
+.virtual-keyboard__container__symbol-switcher,
+.virtual-keyboard__container__reverse-switcher {
   flex-grow: 1;
   border: var(--border-none);
   padding: 0.5rem;
@@ -351,6 +353,18 @@ main {
   background: var(--background-none);
   background-color: grey;
   color: var(--primary-color);
+}
+
+.virtual-keyboard__container__regular-buttons:hover,
+.virtual-keyboard__container__delete-key:hover,
+.virtual-keyboard__container__arrow-key:hover,
+.virtual-keyboard__container__english:hover,
+.virtual-keyboard__container__persian:hover,
+.virtual-keyboard__container__space-button:hover,
+.virtual-keyboard__container__submit-button:hover,
+.virtual-keyboard__container__symbol-switcher:hover,
+.virtual-keyboard__container__reverse-switcher:hover {
+  background-color: rgba(128, 128, 128, 0.822);
 }
 
 .virtual-keyboard__container__english,
@@ -381,7 +395,7 @@ main {
     border: var(--borders);
     position: absolute;
     right: 20px;
-    bottom: 50px;
+    bottom: 64px;
     padding: var(--submit-task-padding);
     border-radius: var(--submit-task-radius);
     background-color: var(--submit-task-background-color);
