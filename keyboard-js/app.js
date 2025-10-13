@@ -21,6 +21,16 @@ document.body.addEventListener("click", (e) => {
     toggleLangs(langs.keyboard.en);
   }
   if (
+    e.target.classList.contains("virtual-keyboard__container__symbol-switcher")
+  ) {
+    toggleLangs(langs.keyboard.symbols);
+  }
+  if (
+    e.target.classList.contains("virtual-keyboard__container__reverse-switcher")
+  ) {
+    toggleLangs(langs.keyboard.en);
+  }
+  if (
     e.target.classList.contains("virtual-keyboard__container__submit-button")
   ) {
     const value = taskInput.value.trim();
