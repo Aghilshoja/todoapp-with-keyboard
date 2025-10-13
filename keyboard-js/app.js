@@ -4,6 +4,7 @@ import { toggleLangs } from "./toggle-langs.js";
 import { taskManager } from "../js/app.js";
 import { renderTasks } from "../js/app.js";
 import { hideToolbar } from "../js/hide-toolbar.js";
+import { toggleCapsLock } from "./caps-lock-feature.js";
 import "./get-characters.js";
 
 export const keyboardManager = new keyboard(app);
@@ -43,5 +44,8 @@ document.body.addEventListener("click", (e) => {
   }
   if (e.target.classList.contains("virtual-keyboard__container__delete-key")) {
     taskInput.value = taskInput.value.slice(0, -1);
+  }
+  if (e.target.classList.contains("virtual-keyboard__container__arrow-key")) {
+    toggleCapsLock();
   }
 });
