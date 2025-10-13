@@ -48,4 +48,9 @@ document.body.addEventListener("click", (e) => {
   if (e.target.classList.contains("virtual-keyboard__container__arrow-key")) {
     toggleCapsLock();
   }
+  if (
+    e.target.classList.contains("virtual-keyboard__container__space-button")
+  ) {
+    taskInput.value += " ";
+  }
 });
