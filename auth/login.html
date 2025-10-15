@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/auth/auth.css" />
+    <title>Login page and sign up page</title>
+  </head>
+  <body>
+    <header>
+      <h1>Smart To Do</h1>
+    </header>
+
+    <nav class="submit-validation">
+      <button class="submit-validation__login">log in</button>
+      <button class="submit-validation__signup">sign up</button>
+    </nav>
+
+    <section class="login">
+      <form class="login__form">
+        <label
+          class="login__form__label"
+          for="username"
+          aria-label="enter your username"
+          >Enter the userame that you signed up before with</label
+        >
+        <input
+          type="text"
+          class="login__form__username"
+          id="username"
+          placeholder="username"
+        />
+        <div class="login__form__username-error"></div>
+        <label class="login__form__label" for="pwd"
+          >Enter your password your sign up before</label
+        >
+        <input
+          type="password"
+          class="login__form__user-password"
+          placeholder="your password"
+          id="pwd"
+        />
+        <div class="login__form__password-error"></div>
+        <p class="login__form__forget-pwd">
+          <a href="#" class="forget">Forget your password?</a>
+        </p>
+        <button class="continue">log in</button>
+      </form>
+    </section>
+
+    <section class="signup">
+      <form class="signup__form">
+        <label
+          class="signup__form__label"
+          for="username-info"
+          aria-label="enter your username"
+          >Enter the userame that you signed up before with</label
+        >
+        <input
+          type="text"
+          class="signup__form__username"
+          id="username-info"
+          placeholder="username"
+        />
+        <div class="signup__form__username--error"></div>
+        <label for="eamil" class="signup__form__label"
+          >Enter your email to sign up in this app</label
+        >
+        <input
+          id="email"
+          type="email"
+          class="signup__form__user-email"
+          placeholder="your email"
+        />
+        <div class="signup__form__email-error"></div>
+        <label class="signup__form__label" for="username-password"
+          >Enter your password your sign up before</label
+        >
+        <input
+          type="password"
+          class="signup__form__username-password"
+          placeholder="your password"
+          id="username-password"
+        />
+        <div class="signup__form__password--error"></div>
+        <button class="continue">sign up</button>
+      </form>
+    </section>
+    <script type="module" src=""></script>
+  </body>
+</html>

@@ -1,0 +1,94 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* == font == */
+  --font-family: Arial, Helvetica, sans-serif;
+  /* === border === */
+  --border-radius: 20px;
+
+  --border-none: none;
+  /* == padding == */
+  --padding: 0.4rem;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
+  font-family: var(--font-family);
+}
+
+.login__form__label,
+.signup__form__label {
+  position: absolute;
+  left: -10000px;
+}
+
+.login,
+.signup {
+  width: 40%;
+}
+
+.signup {
+  display: none;
+}
+
+.submit-validation {
+  display: flex;
+  gap: 0.1rem;
+  background-color: gray;
+  padding: 0.1rem;
+  margin-bottom: 0.4rem;
+  width: 28%;
+}
+
+.login__form,
+.signup__form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.login__form__username,
+.signup__form__username,
+.login__form__user-password,
+.signup__form__user-email,
+.signup__form__username-password {
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+  flex-grow: 1;
+}
+
+.submit-validation__login,
+.submit-validation__signup {
+  flex-grow: 1;
+  padding: var(--padding);
+  border: var(--border-none);
+}
+
+.submit-validation__login {
+  border-radius: 20px 0 0 20px;
+}
+
+.submit-validation__signup {
+  border-radius: 0 20px 20px 0;
+}
+
+.continue {
+  padding: var(--padding);
+  border: var(--border-none);
+  border-radius: var(--border-radius);
+  background-color: lightblue;
+}
+
+.login__form__forget-pwd {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 0.7rem;
+}
