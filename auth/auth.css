@@ -109,7 +109,8 @@ body {
 
 .login__form__username-error,
 .login__form__password-error,
-.signup__form__username--error {
+.signup__form__username--error,
+.signup__form__password--error {
   color: var(--red);
   font-size: var(--font-size);
 }
