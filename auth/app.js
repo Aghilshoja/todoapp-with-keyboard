@@ -3,6 +3,7 @@ import { validatePasswordInput } from "./password-login-error.js";
 import { toggleSignUp } from "./toggle-signup-page.js";
 import { toggleLogin } from "./toggle-login-page.js";
 import { validateUsernameSignup } from "./username-signup-error.js";
+import { validatePasswordSigUp } from "./password-signup-error.js";
 
 document.querySelector(".login__form").addEventListener("submit", (e) => {
   e.preventDefault();
@@ -13,7 +14,7 @@ document.querySelector(".login__form").addEventListener("submit", (e) => {
 
 document.querySelector(".signup__form").addEventListener("submit", (e) => {
   e.preventDefault();
-  if (validateUsernameSignup()) {
+  if (validateUsernameSignup() && validatePasswordSigUp()) {
     window.location.href = "index.html";
   }
 });
