@@ -73,6 +73,7 @@ body {
   flex-grow: 1;
   padding: var(--padding);
   border: var(--border-none);
+  cursor: pointer;
 }
 
 .submit-validation__login {
@@ -88,6 +89,11 @@ body {
   border: var(--border-none);
   border-radius: var(--border-radius);
   background-color: lightblue;
+  cursor: pointer;
+}
+
+.continue:hover {
+  background-color: rgba(173, 216, 230, 0.861);
 }
 
 .login__form__forget-pwd {
@@ -96,7 +102,8 @@ body {
   font-size: 0.7rem;
 }
 
-.login__form__username-error {
+.login__form__username-error,
+.login__form__password-error {
   color: var(--red);
   font-size: var(--font-size);
 }
