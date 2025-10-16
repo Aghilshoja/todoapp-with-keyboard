@@ -96,6 +96,11 @@ body {
   background-color: rgba(173, 216, 230, 0.861);
 }
 
+.submit-validation__login:hover,
+.submit-validation__signup:hover {
+  background-color: rgba(255, 255, 255, 0.792);
+}
+
 .login__form__forget-pwd {
   display: flex;
   justify-content: flex-end;
@@ -106,4 +111,22 @@ body {
 .login__form__password-error {
   color: var(--red);
   font-size: var(--font-size);
+}
+
+.login--hiding {
+  display: none;
+}
+
+.signup--rendering {
+  display: block;
+}
+
+.submit-validation__signup--background,
+.submit-validation__login--background {
+  background-color: rgb(204, 225, 243);
+}
+
+.submit-validation__signup--background:hover,
+.submit-validation__login--background:hover {
+  background-color: rgba(204, 225, 243, 0.938);
 }
