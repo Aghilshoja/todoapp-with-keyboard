@@ -1,10 +1,10 @@
-import { validatePasswordLogin } from "./pure-passwrod-logic-login.js";
+import { validatePassword } from "./password-logic-validation.js";
 
 export const validatePasswordInput = () => {
   const password = document.querySelector(".login__form__user-password");
   const passwordError = document.querySelector(".login__form__password-error");
 
-  if (validatePasswordLogin(password.value)) {
+  if (validatePassword(password.value)) {
     return true;
   } else {
     passwordError.textContent =
