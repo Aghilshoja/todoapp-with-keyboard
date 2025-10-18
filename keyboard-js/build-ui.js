@@ -1,5 +1,10 @@
+import { stateOfInputs } from "./app.js";
+
 export const createElement = (chars, specialKey) => {
   const buttons = document.createElement("button");
+  buttons.addEventListener("mousedown", (e) => {
+    e.preventDefault();
+  });
 
   if (specialKey[chars]) {
     buttons.className = specialKey[chars].class;
@@ -7,7 +12,16 @@ export const createElement = (chars, specialKey) => {
   } else {
     buttons.classList.add("virtual-keyboard__container__regular-buttons");
     buttons.textContent = chars;
-  }
+    buttons.addEventListener("click", () => {
+      if (!stateOfInputs.activeInput) return;
 
+      stateOfInputs.activeInput.value += buttons.textContent;
+
+      // Simulate native input event so listeners (like search) react to virtual typing
+
+      const event = new Event("input", { bubbles: true });
+      if (event !== null) stateOfInputs.activeInput.dispatchEvent(event);
+    });
+  }
   return buttons;
 };
