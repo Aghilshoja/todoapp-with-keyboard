@@ -17,6 +17,7 @@ import { dropTarget } from "./drop-target.js";
 import { draggedEnter } from "./drag-enter.js";
 import { draggedEndTask } from "./draggend.js";
 import { draggedLeave } from "./dragged-leave.js";
+import { handleTaskValidation } from "./task-validation.js";
 import "./add-task.js";
 import "./get-tasks.js";
 import "./delete-mode.js";
@@ -123,10 +124,10 @@ document.body.addEventListener("click", (e) => {
     dropdownList.classList.remove("dropdown-list--render");
   }
   if (e.target.closest(".form-section__submit-task")) {
-    const value = taskInput.value.trim();
-    if (!value) return;
-    taskManager.addTask(value);
-    taskInput.value = "";
+    e.preventDefault();
+    const value = handleTaskValidation();
+    if (value) taskManager.addTask(value);
+
     renderTasks();
     hideToolbar();
     return;
