@@ -3,6 +3,7 @@ import { taskManager } from "./app.js";
 
 export const filterSearchedTasks = (findSearch, clearButton) => {
   const search = findSearch.value.trim().toLowerCase();
+  if (!search) return;
   const filteredByFirstLetter = taskManager.filterSearchedTask(search);
 
   const tasksHolder = document.querySelector(".todo__tasks-holder");

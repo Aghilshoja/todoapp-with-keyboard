@@ -1,5 +1,6 @@
 import { filterSearchedTasks } from "./filter-searched-task.js";
 import { renderTasks } from "./app.js";
+import { stateOfInputs } from "../keyboard-js/app.js";
 
 const createInput = () => {
   const searchModeFilter = `
@@ -31,12 +32,37 @@ export const isSearchHidden = {
 
 export const replaceHeaderWithSearch = () => {
   const header = document.querySelector(".header");
+  const spaceBar = document.querySelector(
+    ".virtual-keyboard__container__space-button"
+  );
+  if (!spaceBar) return;
+
+  const backSapce = document.querySelector(
+    ".virtual-keyboard__container__delete-key"
+  );
+  if (!backSapce) return;
 
   if (!isSearchHidden.state) {
     header.classList.remove("header");
     header.innerHTML = createInput();
     const searchIcon = header.querySelector(".header__search-box");
     const clearButton = header.querySelector(".header__clear-value");
+
+    spaceBar.addEventListener("click", () => {
+      searchIcon.value += " ";
+    });
+
+    backSapce.addEventListener("click", () => {
+      searchIcon.value = searchIcon.value.slice(0, -1);
+    });
+
+    searchIcon.addEventListener("focus", () => {
+      stateOfInputs.activeInput = searchIcon;
+    });
+
+    searchIcon.addEventListener("blur", () => {
+      stateOfInputs.activeInput = null;
+    });
 
     searchIcon.addEventListener("input", () =>
       filterSearchedTasks(searchIcon, clearButton)

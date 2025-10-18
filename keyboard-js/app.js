@@ -9,10 +9,22 @@ import "./get-characters.js";
 
 export const keyboardManager = new keyboard(app);
 
+export let stateOfInputs = {
+  activeInput: null,
+};
+
 const langs = keyboardManager.getCharacters();
 toggleLangs(langs.keyboard.en);
 
 const taskInput = document.querySelector(".form-section__task-input");
+
+taskInput.addEventListener("focus", () => {
+  stateOfInputs.activeInput = taskInput;
+});
+
+taskInput.addEventListener("blur", () => {
+  stateOfInputs.activeInput = null;
+});
 
 document.body.addEventListener("click", (e) => {
   if (e.target.classList.contains("virtual-keyboard__container__english")) {
