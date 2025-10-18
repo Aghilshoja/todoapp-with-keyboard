@@ -6,6 +6,7 @@ import { renderTasks } from "../js/app.js";
 import { hideToolbar } from "../js/hide-toolbar.js";
 import { toggleCapsLock } from "./caps-lock-feature.js";
 import "./get-characters.js";
+import { handleTaskValidation } from "../js/task-validation.js";
 
 export const keyboardManager = new keyboard(app);
 
@@ -46,9 +47,8 @@ document.body.addEventListener("click", (e) => {
   if (
     e.target.classList.contains("virtual-keyboard__container__submit-button")
   ) {
-    const value = taskInput.value.trim();
-    if (!value) return;
-    taskManager.addTask(value);
+    const value = handleTaskValidation();
+    if (value) taskManager.addTask(value);
     taskInput.value = "";
     renderTasks();
     hideToolbar();

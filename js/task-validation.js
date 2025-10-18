@@ -1,0 +1,13 @@
+const taskInput = document.querySelector(".form-section__task-input");
+const showError = document.querySelector(".input-field__hide-error");
+
+export const handleTaskValidation = () => {
+  if (taskInput.value === "") {
+    showError.classList.add("input-field__show-error");
+    showError.textContent = "Please enter a task";
+    setTimeout(() => {
+      showError.classList.remove("input-field__show-error");
+    }, 2000);
+  }
+  return taskInput.value.trim();
+};

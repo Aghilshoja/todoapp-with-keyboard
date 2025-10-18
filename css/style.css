@@ -372,6 +372,15 @@ main {
   flex-grow: 2;
 }
 
+.input-field__hide-error {
+  display: none;
+}
+
+.input-field__show-error {
+  display: block;
+  color: red;
+}
+
 @media only screen and (max-width: 390px) {
   .virtual-keyboard__container__regular-buttons,
   .virtual-keyboard__container__persian,
