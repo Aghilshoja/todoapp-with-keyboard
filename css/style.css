@@ -13,19 +13,17 @@
   --border-none: none;
   /*== fonts ==*/
   --font-family: Arial, Helvetica, sans-serif;
+  --font-size: 1.4rem;
   /* ==background */
   --background-none: none;
   /*== header layout === */
   --header-background-color: #21a99a;
-  /* == main el  ==*/
-  --main-height: calc(100vh - 60px);
   /* ===== task input ======*/
   --task-input-padding: 0.5rem;
   /* == submit button == */
   --submit-task-padding: 0.8rem;
   --submit-task-radius: 50%;
   --submit-task-background-color: rgba(70, 131, 180, 0.741);
-  --submit-task-font-size: 1.4rem;
   /* == task item  == */
   --task-item-margin: 0.5rem 1rem 0.5rem 1rem;
   --task-item-padding: 0.5rem 0.4rem 0.4rem 0.4rem;
@@ -34,13 +32,16 @@
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100dvh;
   font-family: var(--font-family);
 }
 
 .header {
   display: flex;
   justify-content: space-between;
-  flex: 1 1 auto;
   align-items: center;
 }
 
@@ -58,16 +59,14 @@ body {
   margin-inline: 0.5rem;
   background: var(--background-none);
   color: inherit;
-  font-size: var(--submit-task-font-size);
+  font-size: var(--font-size);
   cursor: pointer;
 }
 
-main {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  height: var(--main-height); /* main area fills viewport minus header height */
-} /* Visually hidden for accessibility (screen readers) */
+main,
+.virtual-keyboard {
+  display: contents;
+}
 
 /* Accessibility: visually hidden elements */
 .todo__section-title,
@@ -91,14 +90,10 @@ main {
   font-size: 1.6rem;
 }
 
-.form-section__submit-task {
-  display: none;
-}
-
 /* make the tasks scrollable when their their height is 50 vh */
 .todo__tasks-holder {
-  height: 50vh;
-  overflow: auto;
+  height: 10dvh;
+  overflow-x: auto;
   list-style: none;
 }
 /* each task */
@@ -115,7 +110,7 @@ main {
 .no-searched-tasks,
 .no-completed-tasks {
   background-color: antiquewhite;
-  margin: 6rem 4rem 2rem 4rem;
+  margin: 2rem 2rem 0 2rem;
   list-style: none;
   padding: 0.4rem;
   color: var(--black-color);
@@ -139,7 +134,15 @@ main {
   justify-content: flex-end;
 }
 
-.action-buttons {
+.action-buttons,
+.action-buttons__check-mark,
+.input-field__hide-error,
+.form-section__submit-task,
+.header__clear-value,
+.dropdown-list,
+.dropdown-list__header,
+.virtual-keyboard__header,
+.toolbar {
   display: none;
 }
 
@@ -152,16 +155,12 @@ main {
   background: var(--background-none);
   color: inherit;
   border: var(--border-none);
-  font-size: var(--submit-task-font-size);
+  font-size: var(--font-size);
   cursor: pointer;
 }
 
 .toolbar__count-individual-task {
   color: var(--primary-color);
-}
-
-.action-buttons__check-mark {
-  display: none;
 }
 
 .action-buttons__handle-edit,
@@ -173,16 +172,12 @@ main {
   background: none;
   color: inherit;
   border: var(--border-none);
-  font-size: var(--submit-task-font-size);
+  font-size: var(--font-size);
   cursor: pointer;
 }
 
 .action-buttons__ellipsis-icon {
   font-size: 1.2em;
-}
-
-.action-buttons--render-toolbar {
-  display: block;
 }
 
 .action-buttons__handle-copy {
@@ -202,7 +197,6 @@ main {
 }
 
 .toolbar {
-  display: none;
   position: fixed;
   top: 16px;
 }
@@ -225,7 +219,9 @@ main {
   color: var(--primary-color);
 }
 
-.toolbar--rendering {
+.toolbar--rendering,
+.action-buttons__show-check-mark,
+.action-buttons--render-toolbar {
   display: block;
 }
 
@@ -237,10 +233,6 @@ main {
   background-color: #a1b9b7;
 }
 
-.action-buttons__show-check-mark {
-  display: block;
-}
-
 .task-item--done {
   text-decoration: line-through;
 }
@@ -248,13 +240,6 @@ main {
 .dark-mode {
   background-color: var(--black-color);
   transition: background 0.5s, color 0.6s;
-}
-
-.header__clear-value,
-.dropdown-list,
-.dropdown-list__header,
-.virtual-keyboard__header {
-  display: none;
 }
 
 .header__search-mode {
@@ -279,17 +264,13 @@ main {
   cursor: pointer;
 }
 
-.header__more-btns {
-  position: relative;
-}
-
 /* show the dropdown list below the ellipsis icon  */
 .dropdown-list--render {
   display: block;
   position: absolute;
   background-color: #21a99a;
   top: 58px;
-  right: 10px;
+  right: 0;
 }
 
 .dropdown-list__all-tasks,
@@ -324,15 +305,14 @@ main {
 .virtual-keyboard__container__row-4 {
   display: flex;
   flex-wrap: wrap;
-  flex: 1 1 auto;
 }
 
 .virtual-keyboard__container__row-1 {
-  padding: 0 1.2rem 0 1.2rem;
+  padding: 0 0.3rem 0 0.3rem;
 }
 
 .virtual-keyboard__container__row-2 {
-  padding: 0 1.8rem 0 1.8rem;
+  padding: 0 0.4rem 0 0.4rem;
 }
 
 .virtual-keyboard__container__regular-buttons,
@@ -349,7 +329,7 @@ main {
   padding: 0.5rem;
   margin: 0.2rem;
   border-radius: 5px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   background: var(--background-none);
   background-color: grey;
   color: var(--primary-color);
@@ -372,32 +352,14 @@ main {
   flex-grow: 2;
 }
 
-.input-field__hide-error {
-  display: none;
-}
-
 .input-field__show-error {
   display: block;
   color: red;
 }
 
-@media only screen and (max-width: 390px) {
-  .virtual-keyboard__container__regular-buttons,
-  .virtual-keyboard__container__persian,
-  .virtual-keyboard__container__space-button,
-  .virtual-keyboard__container__arrow-key,
-  .virtual-keyboard__container__delete-key,
-  .virtual-keyboard__container__submit-button,
-  .virtual-keyboard__container__symbol-switcher,
-  .virtual-keyboard__container__english {
-    font-size: 1rem;
-    padding: 0.4rem;
-  }
-}
-
-@media only screen and (min-width: 1201px) {
+@media (min-width: 1201px) {
   .virtual-keyboard__container {
-    display: none;
+    display: block;
   }
   .form-section__submit-task {
     display: block;
@@ -410,5 +372,100 @@ main {
     background-color: var(--submit-task-background-color);
     color: var(--primary-color);
     cursor: pointer;
+  }
+}
+
+/*  == height == */
+
+@media (min-height: 401px) {
+  .todo__tasks-holder {
+    height: 35dvh;
+  }
+}
+
+@media (min-height: 601px) {
+  .todo__tasks-holder {
+    height: 40dvh;
+  }
+  .virtual-keyboard__container__arrow-key,
+  .virtual-keyboard__container__delete-key,
+  .virtual-keyboard__container__english,
+  .virtual-keyboard__container__persian,
+  .virtual-keyboard__container__regular-buttons {
+    font-size: 1.2rem;
+  }
+  .action-buttons__backarrow,
+  .action-buttons__handle-copy,
+  .action-buttons__handle-delete,
+  .action-buttons__handle-edit,
+  .toolbar__clear-all-tasks,
+  .toolbar__count-individual-task,
+  .toolbar__count-total-tasks {
+    top: 14px;
+    font-size: 1.8rem;
+  }
+  .toolbar__count-individual-task {
+    left: 50px;
+  }
+  .toolbar__clear-all-tasks {
+    right: 120px;
+  }
+  .action-buttons__handle-copy {
+    right: 85px;
+  }
+  .action-buttons__handle-delete {
+    right: 50px;
+  }
+  .toolbar__count-total-tasks {
+    right: 180px;
+  }
+  .header__back-arrow {
+    font-size: 1.7rem;
+  }
+  .header__search-box {
+    font-size: 1rem;
+  }
+  .task-item {
+    font-size: 1.5rem;
+  }
+  .dropdown-list__all-tasks,
+  .dropdown-list__completed-tasks,
+  .dropdown-list__edited-tasks {
+    font-size: 1.3rem;
+  }
+  .no-completed-tasks,
+  .no-searched-tasks,
+  .no-task-added {
+    font-size: 1.4rem;
+  }
+  .wrapper__is-completed {
+    width: 15px;
+  }
+}
+
+@media (min-height: 800px) {
+  .todo__tasks-holder {
+    height: 50dvh;
+  }
+  .virtual-keyboard__container__arrow-key,
+  .virtual-keyboard__container__delete-key,
+  .virtual-keyboard__container__english,
+  .virtual-keyboard__container__persian,
+  .virtual-keyboard__container__regular-buttons {
+    font-size: 1.5rem;
+  }
+  .task-item {
+    font-size: 1.7rem;
+  }
+  .wrapper__is-completed {
+    width: 16px;
+  }
+  .header {
+    font-size: 1.3rem;
+  }
+  .header__search-btn,
+  .header__dark-mode-btn,
+  .header__more-btns {
+    font-size: 2rem;
   }
 }
