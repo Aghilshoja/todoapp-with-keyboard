@@ -242,6 +242,10 @@ main,
   transition: background 0.5s, color 0.6s;
 }
 
+.dark-mode .input-field__show-error {
+  color: var(--primary-color);
+}
+
 .header__search-mode {
   display: flex;
   column-gap: 0.3rem;
@@ -355,12 +359,16 @@ main,
 .input-field__show-error {
   display: block;
   color: red;
+  font-size: 1.5rem;
 }
 
-@media (min-width: 1201px) {
+@media (min-width: 1281px) {
   .virtual-keyboard__container {
     display: block;
   }
+}
+
+@media (min-width: 1300px) {
   .form-section__submit-task {
     display: block;
     border: var(--borders);
@@ -373,9 +381,12 @@ main,
     color: var(--primary-color);
     cursor: pointer;
   }
+  .virtual-keyboard__container {
+    display: none;
+  }
 }
 
-/*  == height == */
+/* == height == */
 
 @media (min-height: 401px) {
   .todo__tasks-holder {
