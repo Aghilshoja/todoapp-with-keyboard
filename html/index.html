@@ -15,34 +15,35 @@
 
     <title>Virtul KeyBoard with To-Do list</title>
     <link rel="stylesheet" href="/css/style.css" />
-     <script
+    <script
       src="https://kit.fontawesome.com/713b912148.js"
       crossorigin="anonymous"
-    ></script> 
+    ></script>
   </head>
 
   <body>
     <div>
-    <header class="header header--design">
-      <h1 class="header__title">Smart To Do</h1>
+      <header class="header header--design">
+        <h1 class="header__title">Smart To Do</h1>
 
-      <div class="header__actions">
-        <button class="header__dark-mode-btn" aria-label="Toggle dark mode">
-          <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
-        </button>
-        <button class="header__search-btn" aria-label="Search tasks">
-          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-        </button>
-        <button class="header__more-btns" aria-label="More options">
-          <i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i>
-        </button>
-      </div>
-    </header>
+        <div class="header__actions">
+          <button class="header__dark-mode-btn" aria-label="Toggle dark mode">
+            <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
+          </button>
+          <button class="header__search-btn" aria-label="Search tasks">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          </button>
+          <button class="header__more-btns" aria-label="More options">
+            <i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i>
+          </button>
+        </div>
+      </header>
+      <!-- tied to do list to the header so that the todo list remains right below the header when display: flex; and justify-content: space-between; applied -->
       <section class="todo">
         <h2 class="todo__section-title">your tasks</h2>
         <ul class="todo__tasks-holder"></ul>
       </section>
-  </div>
+    </div>
 
     <main>
       <section class="dropdown-list">
@@ -65,34 +66,36 @@
           <i class="fa-solid fa-broom"></i>
         </button>
       </section>
-      <div> 
-      <section class="input-field">
-        <h2 class="input-field__section-title">input fields to enter tasks</h2>
-        <div class="input-field__hide-error"></div>
-        <form class="form-section">
-          <label for="users-input" class="form-section__hidden-label"
-            >enter a task in input field</label
-          >
-          <input
-            type="text"
-            id="users-input"
-            class="form-section__task-input"
-            placeholder="enter a task"
-            autocomplete="on"
-            minlength="5"
-          />
-          <button class="form-section__submit-task">
-            <i class="fa-solid fa-paper-plane"></i>
-          </button>
-        </form>
-      </section>
+      <div>
+        <section class="input-field">
+          <h2 class="input-field__section-title">
+            input fields to enter tasks
+          </h2>
+          <div class="input-field__hide-error"></div>
+          <form class="form-section">
+            <!-- used a div element instead of an input since the input triggers your phone keyboard, and that does not let you use the built-in keyboard of the app properly -->
+            <fieldset>
+              <legend>Enter a task</legend>
+              <div
+                tabindex="0"
+                role="textbox"
+                id="users-input"
+                class="form-section__task-input"
+                aria-label="enter a task in input field"
+              ></div>
+            </fieldset>
+            <button class="form-section__submit-task">
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </form>
+        </section>
         <section class="virtual-keyboard">
           <h2 class="virtual-keyboard__header">
             submit your tasks with our smart virtual keyboard
-          </h1>
+          </h2>
           <div class="virtual-keyboard__container"></div>
         </section>
-      </div> 
+      </div>
     </main>
     <script type="module" src="/js/app.js"></script>
     <script type="module" src="/keyboard-js/app.js"></script>

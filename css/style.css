@@ -64,7 +64,9 @@ body {
 }
 
 main,
-.virtual-keyboard {
+.virtual-keyboard,
+.form-section,
+.input-field {
   display: contents;
 }
 
@@ -77,20 +79,35 @@ main,
   left: -1000px;
 }
 
-.form-section {
+fieldset {
   display: flex;
+  margin-bottom: 0.5rem;
+  height: 70px;
+}
+
+.dark-mode fieldset,
+.dark-mode legend {
+  color: var(--primary-color);
+}
+
+legend {
+  margin-left: 1rem;
+  font-size: 1.4rem;
 }
 
 .form-section__task-input {
   flex-grow: 1;
   border: var(--border-none);
-  border-bottom: solid;
   padding: var(--task-input-padding);
   margin-bottom: 0.4rem;
   font-size: 1.6rem;
 }
 
-/* make the tasks scrollable when their their height is 50 vh */
+.form-section__task-input:focus {
+  outline: none;
+}
+
+/* make the tasks scrollable when their total height is more than 8dvh */
 .todo__tasks-holder {
   height: 10dvh;
   overflow-x: auto;
@@ -253,7 +270,10 @@ main,
 }
 
 .header__search-box {
+  border: 1px solid var(--black-color);
+  background-color: white;
   flex-grow: 1;
+  color: black;
   padding: 0.3rem;
   border-radius: 20px;
 }
@@ -374,7 +394,7 @@ main,
     border: var(--borders);
     position: absolute;
     right: 20px;
-    bottom: 64px;
+    bottom: 84px;
     padding: var(--submit-task-padding);
     border-radius: var(--submit-task-radius);
     background-color: var(--submit-task-background-color);
@@ -390,7 +410,7 @@ main,
 
 @media (min-height: 401px) {
   .todo__tasks-holder {
-    height: 35dvh;
+    height: 27dvh;
   }
 }
 
@@ -462,7 +482,8 @@ main,
   .virtual-keyboard__container__delete-key,
   .virtual-keyboard__container__english,
   .virtual-keyboard__container__persian,
-  .virtual-keyboard__container__regular-buttons {
+  .virtual-keyboard__container__regular-buttons,
+  .virtual-keyboard__container__space-button {
     font-size: 1.5rem;
   }
   .task-item {

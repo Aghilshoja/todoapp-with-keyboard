@@ -18,6 +18,7 @@ import { draggedEnter } from "./drag-enter.js";
 import { draggedEndTask } from "./draggend.js";
 import { draggedLeave } from "./dragged-leave.js";
 import { handleTaskValidation } from "./task-validation.js";
+import { setContentEditable } from "./input-mode-controller.js";
 import "./add-task.js";
 import "./get-tasks.js";
 import "./delete-mode.js";
@@ -54,10 +55,19 @@ const loadDarkMode = () => {
   }
 };
 
+const searchBox = {
+  isSearchBox: null,
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   loadTasks();
   loadDarkMode();
+  setContentEditable(searchBox.isSearchBox);
 });
+
+window.addEventListener("resize", () =>
+  setContentEditable(searchBox.isSearchBox)
+);
 
 export const stateOfEdited = {
   isEdited: null,
@@ -69,7 +79,7 @@ export let isTasksClearedOrCounted = {
 const taskInput = document.querySelector(".form-section__task-input");
 
 export const renderTasks = (filteredTasks) => {
-  taskList.textContent = "";
+  taskList.textContent = ""; // clear the task list so they do not get duplicated after adding a task
 
   const tasks = filteredTasks || taskManager.getTasks();
   const sortedTask = [...tasks].sort((a, b) => {
@@ -126,8 +136,9 @@ document.body.addEventListener("click", (e) => {
   if (e.target.closest(".form-section__submit-task")) {
     e.preventDefault();
     const value = handleTaskValidation();
-    if (value) taskManager.addTask(value);
-
+    const trimedValue = value.textContent.trim();
+    if (trimedValue !== "") taskManager.addTask(trimedValue);
+    value.textContent = "";
     renderTasks();
     hideToolbar();
     return;
@@ -178,7 +189,7 @@ document.body.addEventListener("click", (e) => {
     const taskToEdit = taskManager.handleEditTask(taskId);
     if (taskToEdit) {
       const cleanedText = taskToEdit.text.replace(/\s*\(edited\)$/, "");
-      taskInput.value = cleanedText;
+      taskInput.textContent = cleanedText;
       /* flip flag of the edited tasks to true so that we can find all of the edited tasks */
       taskToEdit.showEditedTasks = !taskToEdit.showEditedTasks;
     }
@@ -191,7 +202,7 @@ document.body.addEventListener("click", (e) => {
     const taskTocopy = taskManager.handleCopyTask(taskId);
     if (taskTocopy) displayVisualFeedback(e, taskTocopy);
     setTimeout(() => {
-      hideToolbar();
+      hideToolbar(); // execute toolbar after 2 seconds so that check mark can show up as a feedback of copying action
     }, 2000);
     return;
   }
@@ -204,7 +215,9 @@ document.body.addEventListener("click", (e) => {
     localStorage.setItem("darkMode", JSON.stringify(darkMode));
   }
   if (e.target.closest(".header__search-btn")) {
-    replaceHeaderWithSearch();
+    const newSearchBox = replaceHeaderWithSearch();
+    searchBox.isSearchBox = newSearchBox;
+    setContentEditable(searchBox.isSearchBox); 
     return;
   }
   if (e.target.closest(".header__back-arrow")) {

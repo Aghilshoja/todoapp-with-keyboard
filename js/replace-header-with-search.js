@@ -2,15 +2,12 @@ import { filterSearchedTasks } from "./filter-searched-task.js";
 import { renderTasks } from "./app.js";
 import { stateOfInputs } from "../keyboard-js/app.js";
 
-const createInput = () => {
-  const searchModeFilter = `
+const createInput = () => `
     <div class="header__search-mode">
     <button class="header__back-arrow"><i class="fa-solid fa-arrow-left"></i></button>
-    <input class="header__search-box" placeholder="search for the task" type="text">
+    <div tabindex="0" role="textbox" class="header__search-box">search for tasks</div>
     <button class="header__clear-value"><i class="fa-solid fa-xmark"></i></button>
     `;
-  return searchModeFilter;
-};
 
 export const createHeader = () => `  <h1 class="header__title">Smart To Do</h1>
 
@@ -32,6 +29,7 @@ export const isSearchHidden = {
 
 export const replaceHeaderWithSearch = () => {
   const header = document.querySelector(".header");
+  if (!header) return;
   const spaceBar = document.querySelector(
     ".virtual-keyboard__container__space-button"
   );
@@ -48,15 +46,22 @@ export const replaceHeaderWithSearch = () => {
     const searchIcon = header.querySelector(".header__search-box");
     const clearButton = header.querySelector(".header__clear-value");
 
-    spaceBar.addEventListener("click", () => {
-      searchIcon.value += " ";
+    document.addEventListener("click", (e) => {
+      if (e.target.closest(".virtual-keyboard__container__space-button")) {
+        searchIcon.textContent += " ";
+      }
     });
 
-    backSapce.addEventListener("click", () => {
-      searchIcon.value = searchIcon.value.slice(0, -1);
+    document.addEventListener("click", (e) => {
+      if (
+        e.target.classList.contains("virtual-keyboard__container__delete-key")
+      ) {
+        searchIcon.textContent = searchIcon.textContent.slice(0, -1);
+      }
     });
 
     searchIcon.addEventListener("focus", () => {
+      searchIcon.textContent = "";
       stateOfInputs.activeInput = searchIcon;
     });
 
@@ -69,15 +74,13 @@ export const replaceHeaderWithSearch = () => {
     );
 
     clearButton.addEventListener("click", () => {
-      searchIcon.value = "";
+      searchIcon.textContent = "";
       clearButton.classList.remove("header__show-clear-value");
       renderTasks();
     });
-  } else {
-    const headerDesign = document.querySelector(".header--design");
-    headerDesign.innerHTML = createHeader();
-    headerDesign.classList.add("header");
+    return searchIcon;
   }
 
   isSearchHidden.state = !isSearchHidden.state;
+  return searchIcon;
 };

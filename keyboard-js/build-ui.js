@@ -15,7 +15,7 @@ export const createElement = (chars, specialKey) => {
     buttons.addEventListener("click", () => {
       if (!stateOfInputs.activeInput) return;
 
-      stateOfInputs.activeInput.value += buttons.textContent;
+      stateOfInputs.activeInput.textContent += buttons.textContent;
 
       // Simulate native input event so listeners (like search) react to virtual typing
 
