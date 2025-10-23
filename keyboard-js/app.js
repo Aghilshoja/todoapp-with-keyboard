@@ -48,21 +48,21 @@ document.body.addEventListener("click", (e) => {
     e.target.classList.contains("virtual-keyboard__container__submit-button")
   ) {
     const value = handleTaskValidation();
-    if (value) taskManager.addTask(value);
-    taskInput.value = "";
+    const trimmedValue = value.textContent.trim();
+    if (trimmedValue !== "" && trimmedValue !== "enter a task")
+      taskManager.addTask(trimmedValue);
+    value.textContent = "";
     renderTasks();
     hideToolbar();
     return;
   }
   if (e.target.classList.contains("virtual-keyboard__container__delete-key")) {
-    taskInput.value = taskInput.value.slice(0, -1);
+    taskInput.textContent = taskInput.textContent.slice(0, -1);
   }
   if (e.target.classList.contains("virtual-keyboard__container__arrow-key")) {
     toggleCapsLock();
   }
-  if (
-    e.target.classList.contains("virtual-keyboard__container__space-button")
-  ) {
-    taskInput.value += " ";
+  if (e.target.closest(".virtual-keyboard__container__space-button")) {
+    taskInput.textContent += " ";
   }
 });

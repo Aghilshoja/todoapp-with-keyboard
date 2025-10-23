@@ -2,7 +2,7 @@ import { renderTasks } from "./app.js";
 import { taskManager } from "./app.js";
 
 export const filterSearchedTasks = (findSearch, clearButton) => {
-  const search = findSearch.value.trim().toLowerCase();
+  const search = findSearch.textContent.trim().toLowerCase();
   if (!search) return;
   const filteredByFirstLetter = taskManager.filterSearchedTask(search);
 
