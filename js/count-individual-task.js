@@ -1,4 +1,4 @@
-import { isTasksClearedOrCounted } from "./app.js";
+import { isTasksClearedOrCounted } from "./toggle-and-clear-tasks.js";
 
 export const state = {
   taskCounter: 0,

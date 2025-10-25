@@ -1,5 +1,5 @@
 import { filterSearchedTasks } from "./filter-searched-task.js";
-import { renderTasks } from "./app.js";
+import { renderTasks } from "./render-tasks.js";
 import { stateOfInputs } from "../keyboard-js/app.js";
 
 const createInput = () => `

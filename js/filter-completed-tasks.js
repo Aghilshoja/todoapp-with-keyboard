@@ -1,7 +1,7 @@
 import { taskManager } from "./app.js";
-import { renderTasks } from "./app.js";
-
-export const filterAndRender = (filter, emptyMessage) => {
+import { renderTasks } from "./render-tasks.js";
+  
+const filterAndRender = (filter, emptyMessage) => {
   const filteredTasks = taskManager.showCompletedTasks(filter);
   if (!filteredTasks) return;
 
@@ -14,3 +14,12 @@ export const filterAndRender = (filter, emptyMessage) => {
     tasksHolder.innerHTML = `<li class="no-completed-tasks">${emptyMessage}</li>`;
   }
 };
+
+ export const renderCompletedTasks = () =>
+  filterAndRender((t) => t.isCompleted, "no completed tasks found");
+
+export const showEditedTasks = () =>
+  filterAndRender(
+    (editedTasks) => editedTasks.showEditedTasks,
+    "no edited tasks found"
+  ); 
