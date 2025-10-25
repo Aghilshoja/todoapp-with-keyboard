@@ -133,6 +133,19 @@ taskList.addEventListener("dragleave", (e) => draggedLeave(e));
 taskList.addEventListener("drop", (e) => dropTarget(e));
 taskList.addEventListener("dragend", (e) => draggedEndTask(e));
 
+taskInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    const value = handleTaskValidation() 
+    const trimdValue = value.taskInput.textContent.trim()
+    if (trimdValue !== '' && value.span.textContent !== 'Enter a task') taskManager.addTask(trimdValue)
+      value.taskInput.textContent = ''
+    value.span.textContent = 'Enter a task'
+    value.taskInput.appendChild(value.span)
+      renderTasks()
+    hideToolbar()
+  }
+})
+
 document.body.addEventListener("click", (e) => {
   const dropdownList = document.querySelector(".dropdown-list");
   if (dropdownList) {
