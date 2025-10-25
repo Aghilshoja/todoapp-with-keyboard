@@ -490,3 +490,9 @@ main,
     font-size: 2rem;
   }
 }
+
+@media (min-height: 1000px) {
+  .todo__tasks-holder {
+    height: 75dvh;
+  }
+}

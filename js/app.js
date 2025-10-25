@@ -23,6 +23,7 @@ import { toggleAndClearTasks } from "./toggle-and-clear-tasks.js";
 import { performEditTask } from "./perform-edit-task.js";
 import { performDeleteTasks } from "./handle-delete-tasks.js";
 import { performCopyTask } from "./perform-copy-task.js";
+import { submitTaskOnEnter } from "./add-task-on-enter-key.js";
 import "./add-task.js";
 import "./get-tasks.js";
 import "./delete-mode.js";
@@ -65,16 +66,7 @@ taskList.addEventListener("drop", (e) => dropTarget(e));
 taskList.addEventListener("dragend", (e) => draggedEndTask(e));
 
 taskInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-    const value = handleTaskValidation() 
-    const trimdValue = value.taskInput.textContent.trim()
-    if (trimdValue !== '' && value.span.textContent !== 'Enter a task') taskManager.addTask(trimdValue)
-      value.taskInput.textContent = ''
-    value.span.textContent = 'Enter a task'
-    value.taskInput.appendChild(value.span)
-      renderTasks()
-    hideToolbar()
-  }
+ submitTaskOnEnter(e)
 })
 
 document.body.addEventListener("click", (e) => {

@@ -13,7 +13,7 @@ export const performDeleteTasks = (e) => {
     if (confirm("are you sure you wanna delte the tasks permenantly?")) {
       taskManager.handleDeleteTask(taskId, selectedTasks);
 
-      renderTasks(taskLIst);
+      renderTasks();
       hideToolbar();
       resetCounters();
 }
