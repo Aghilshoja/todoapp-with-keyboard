@@ -79,38 +79,27 @@ main,
   left: -1000px;
 }
 
-fieldset {
-  display: flex;
-  margin-bottom: 0.5rem;
-  height: 70px;
-}
-
-.dark-mode fieldset,
-.dark-mode legend {
-  color: var(--primary-color);
-}
-
-legend {
-  margin-left: 1rem;
-  font-size: 1.4rem;
-}
 
 .form-section__task-input {
   flex-grow: 1;
   border: var(--border-none);
+  border-bottom: 1px solid black;
   padding: var(--task-input-padding);
   margin-bottom: 0.4rem;
   font-size: 1.6rem;
+  height: 40px;
+   overflow-y: auto;
 }
 
-.form-section__task-input:focus {
-  outline: none;
+.dark-mode .form-section__task-input {
+  border-bottom: 1px solid var(--primary-color);
+  color: var(--primary-color);
 }
 
 /* make the tasks scrollable when their total height is more than 8dvh */
 .todo__tasks-holder {
   height: 10dvh;
-  overflow-x: auto;
+  overflow-y: auto;
   list-style: none;
 }
 /* each task */

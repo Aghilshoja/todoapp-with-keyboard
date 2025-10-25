@@ -6,6 +6,8 @@ export const createElement = (chars, specialKey) => {
     e.preventDefault();
   });
 
+  const span = document.querySelector('.span')
+
   if (specialKey[chars]) {
     buttons.className = specialKey[chars].class;
     buttons.textContent = chars;
@@ -14,7 +16,7 @@ export const createElement = (chars, specialKey) => {
     buttons.textContent = chars;
     buttons.addEventListener("click", () => {
       if (!stateOfInputs.activeInput) return;
-
+        span.textContent = ''
       stateOfInputs.activeInput.textContent += buttons.textContent;
 
       // Simulate native input event so listeners (like search) react to virtual typing

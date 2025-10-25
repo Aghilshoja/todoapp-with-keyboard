@@ -47,14 +47,17 @@ document.body.addEventListener("click", (e) => {
   if (
     e.target.classList.contains("virtual-keyboard__container__submit-button")
   ) {
-    const value = handleTaskValidation();
-    const trimmedValue = value.textContent.trim();
-    if (trimmedValue !== "" && trimmedValue !== "enter a task")
-      taskManager.addTask(trimmedValue);
-    value.textContent = "";
+    const value = handleTaskValidation()
+    const trimmedValue = value.taskInput.textContent.trim();
+    if (trimmedValue !== "" && value.span.textContent !== "Enter a task") {
+        taskManager.addTask(trimmedValue);
+        value.taskInput.textContent = '';
+        value.span.textContent = 'Enter a task';
+        value.taskInput.appendChild(value.span)
+    
     renderTasks();
     hideToolbar();
-    return;
+    }
   }
   if (e.target.classList.contains("virtual-keyboard__container__delete-key")) {
     taskInput.textContent = taskInput.textContent.slice(0, -1);

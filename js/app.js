@@ -69,6 +69,8 @@ window.addEventListener("resize", () =>
   setContentEditable(searchBox.isSearchBox)
 );
 
+
+
 export const stateOfEdited = {
   isEdited: null,
 };
@@ -77,7 +79,10 @@ export let isTasksClearedOrCounted = {
   state: false,
 };
 const taskInput = document.querySelector(".form-section__task-input");
-
+const span = document.querySelector('.span')
+taskInput.addEventListener('keydown', () => {
+  span.textContent = ''
+})
 export const renderTasks = (filteredTasks) => {
   taskList.textContent = ""; // clear the task list so they do not get duplicated after adding a task
 
@@ -136,9 +141,12 @@ document.body.addEventListener("click", (e) => {
   if (e.target.closest(".form-section__submit-task")) {
     e.preventDefault();
     const value = handleTaskValidation();
-    const trimedValue = value.textContent.trim();
-    if (trimedValue !== "") taskManager.addTask(trimedValue);
-    value.textContent = "";
+    const trimmedValue = value.taskInput.textContent.trim();
+    if (trimmedValue !== "" && value.span.textContent !== "Enter a task") taskManager.addTask(trimmedValue);
+    value.taskInput.textContent = "";
+    value.span.textContent = 'Enter a task';
+    value.taskInput.appendChild(value.span);
+
     renderTasks();
     hideToolbar();
     return;
