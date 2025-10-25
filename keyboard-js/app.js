@@ -1,12 +1,9 @@
 import { keyboard } from "./state-app.js";
 import { app } from "./keyboard-structure.js";
 import { toggleLangs } from "./toggle-langs.js";
-import { taskManager } from "../js/app.js";
-import { renderTasks } from "../js/app.js";
-import { hideToolbar } from "../js/hide-toolbar.js";
 import { toggleCapsLock } from "./caps-lock-feature.js";
 import "./get-characters.js";
-import { handleTaskValidation } from "../js/task-validation.js";
+import { submitTasks } from "../js/submit-tasks.js";
 
 export const keyboardManager = new keyboard(app);
 
@@ -47,17 +44,7 @@ document.body.addEventListener("click", (e) => {
   if (
     e.target.classList.contains("virtual-keyboard__container__submit-button")
   ) {
-    const value = handleTaskValidation()
-    const trimmedValue = value.taskInput.textContent.trim();
-    if (trimmedValue !== "" && value.span.textContent !== "Enter a task") {
-        taskManager.addTask(trimmedValue);
-        value.taskInput.textContent = '';
-        value.span.textContent = 'Enter a task';
-        value.taskInput.appendChild(value.span)
-    
-    renderTasks();
-    hideToolbar();
-    }
+    submitTasks(e);
   }
   if (e.target.classList.contains("virtual-keyboard__container__delete-key")) {
     taskInput.textContent = taskInput.textContent.slice(0, -1);

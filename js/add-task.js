@@ -1,5 +1,5 @@
 import { toDoApp } from "./app-state.js";
-import { stateOfEdited } from "./app.js";
+import { stateOfEdited } from "./perform-edit-task.js";
 
 toDoApp.prototype.addTask = function (text) {
   const newTask = {

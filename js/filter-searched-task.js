@@ -1,5 +1,6 @@
-import { renderTasks } from "./app.js";
+import { renderTasks } from "./render-tasks.js";
 import { taskManager } from "./app.js";
+
 
 export const filterSearchedTasks = (findSearch, clearButton) => {
   const search = findSearch.textContent.trim().toLowerCase();

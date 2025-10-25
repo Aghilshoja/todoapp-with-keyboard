@@ -1,5 +1,5 @@
+import { renderTasks } from "./render-tasks.js";
 import { taskManager } from "./app.js";
-import { renderTasks } from "./app.js";
 
 export const dropTarget = (e) => {
   const taskId = e.dataTransfer.getData("text");

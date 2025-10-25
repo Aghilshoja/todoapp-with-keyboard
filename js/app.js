@@ -1,24 +1,28 @@
 import { toDoApp } from "./app-state.js";
-import { createTaskElement } from "./build-UI.js";
 import { showToolbar } from "./show-toolbar.js";
 import { hideToolbar } from "./hide-toolbar.js";
 import { resetCounters } from "./reset-counters.js";
 import { updateTaskCounter } from "./count-individual-task.js";
-import { clearAllTasks } from "./clear-all-tasks.js";
-import { countTotalTasks } from "./count-total-tasks.js";
-import { displayVisualFeedback } from "./copid-visual-feedback.js";
-import { toggleTaskCompletion } from "./toggle-completion.js";
+import { completeTask } from "./complete-task.js";
 import { replaceHeaderWithSearch } from "./replace-header-with-search.js";
 import { toggleDropDownList } from "./dropdown-list.js";
-import { filterAndRender } from "./filter-completed-tasks.js";
 import { dragStart } from "./drag-start.js";
 import { dragOver } from "./drag-over.js";
 import { dropTarget } from "./drop-target.js";
 import { draggedEnter } from "./drag-enter.js";
 import { draggedEndTask } from "./draggend.js";
 import { draggedLeave } from "./dragged-leave.js";
-import { handleTaskValidation } from "./task-validation.js";
+import { submitTasks } from "./submit-tasks.js";
 import { setContentEditable } from "./input-mode-controller.js";
+import { loadTasks } from "./save-tasks-to-local-storage.js";
+import { renderTasks } from "./render-tasks.js";
+import { loadDarkMode } from "./save-dark-mode-to-loacal-storage.js";
+import { showEditedTasks } from "./filter-completed-tasks.js";
+import { renderCompletedTasks } from "./filter-completed-tasks.js";
+import { toggleAndClearTasks } from "./toggle-and-clear-tasks.js";
+import { performEditTask } from "./perform-edit-task.js";
+import { performDeleteTasks } from "./handle-delete-tasks.js";
+import { performCopyTask } from "./perform-copy-task.js";
 import "./add-task.js";
 import "./get-tasks.js";
 import "./delete-mode.js";
@@ -32,28 +36,6 @@ import "./show-completed-tasks-mode.js";
 export const taskManager = new toDoApp();
 
 const taskList = document.querySelector(".todo__tasks-holder");
-
-const saveTasks = () => {
-  const savedTasks = taskManager.getTasks();
-  localStorage.setItem("todo", JSON.stringify(savedTasks));
-};
-
-const loadTasks = () => {
-  try {
-    const loadedTasks = JSON.parse(localStorage.getItem("todo"));
-    if (Array.isArray(loadedTasks)) taskManager.setTask(loadedTasks);
-  } catch (error) {
-    console.log("catch the error", error);
-  }
-  renderTasks();
-};
-
-const loadDarkMode = () => {
-  const savedDarkMode = JSON.parse(localStorage.getItem("darkMode"));
-  if (savedDarkMode === true) {
-    document.body.classList.add("dark-mode");
-  }
-};
 
 const searchBox = {
   isSearchBox: null,
@@ -69,62 +51,11 @@ window.addEventListener("resize", () =>
   setContentEditable(searchBox.isSearchBox)
 );
 
-
-
-export const stateOfEdited = {
-  isEdited: null,
-};
-
-export let isTasksClearedOrCounted = {
-  state: false,
-};
 const taskInput = document.querySelector(".form-section__task-input");
 const span = document.querySelector('.span')
 taskInput.addEventListener('keydown', () => {
   span.textContent = ''
 })
-export const renderTasks = (filteredTasks) => {
-  taskList.textContent = ""; // clear the task list so they do not get duplicated after adding a task
-
-  const tasks = filteredTasks || taskManager.getTasks();
-  const sortedTask = [...tasks].sort((a, b) => {
-    return b.isCompleted - a.isCompleted;
-  });
-  if (!tasks) return;
-  if (tasks.length === 0) {
-    taskList.innerHTML = `<li class="no-task-added">No tasks added</li>`;
-    saveTasks();
-    return;
-  }
-  sortedTask.forEach((task) => taskList.prepend(createTaskElement(task)));
-  saveTasks();
-};
-
-const toggleAndClearTasks = () => {
-  if (!isTasksClearedOrCounted.state) {
-    countTotalTasks();
-  } else {
-    if (confirm("are you sure wanna delete the tasks?")) {
-      const tasks = taskManager.getTasks();
-
-      const clearTasks = clearAllTasks(tasks);
-      taskManager.setTask(clearTasks);
-      renderTasks();
-      hideToolbar();
-      resetCounters();
-    }
-  }
-  isTasksClearedOrCounted.state = !isTasksClearedOrCounted.state;
-};
-
-const renderCompletedTasks = () =>
-  filterAndRender((t) => t.isCompleted, "no completed tasks found");
-
-const showEditedTasks = () =>
-  filterAndRender(
-    (editedTasks) => editedTasks.showEditedTasks,
-    "no edited tasks found"
-  );
 
 taskList.addEventListener("dragstart", (e) => dragStart(e));
 taskList.addEventListener("dragover", (e) => dragOver(e));
@@ -152,16 +83,7 @@ document.body.addEventListener("click", (e) => {
     dropdownList.classList.remove("dropdown-list--render");
   }
   if (e.target.closest(".form-section__submit-task")) {
-    e.preventDefault();
-    const value = handleTaskValidation();
-    const trimmedValue = value.taskInput.textContent.trim();
-    if (trimmedValue !== "" && value.span.textContent !== "Enter a task") taskManager.addTask(trimmedValue);
-    value.taskInput.textContent = "";
-    value.span.textContent = 'Enter a task';
-    value.taskInput.appendChild(value.span);
-
-    renderTasks();
-    hideToolbar();
+    submitTasks(e);
     return;
   }
   if (e.target.closest(".action-buttons__backarrow")) {
@@ -170,20 +92,8 @@ document.body.addEventListener("click", (e) => {
     return;
   }
   if (e.target.closest(".action-buttons__handle-delete")) {
-    const taskId = Number(
-      e.target.closest(".action-buttons__handle-delete").dataset.id
-    );
-    const selectedTasks = Array.from(
-      document.querySelectorAll(".task-item--selected")
-    ).map((selected) => Number(selected.dataset.id));
-    if (confirm("are you sure you wanna delte the tasks permenantly?")) {
-      taskManager.handleDeleteTask(taskId, selectedTasks);
-
-      renderTasks();
-      hideToolbar();
-      resetCounters();
-      return;
-    }
+    performDeleteTasks(e);
+    return;
   }
   if (e.target.closest(".toolbar__clear-all-tasks")) {
     toggleAndClearTasks();
@@ -193,38 +103,14 @@ document.body.addEventListener("click", (e) => {
     showToolbar(e);
   }
   if (e.target.closest(".wrapper__is-completed")) {
-    const taskId = Number(
-      e.target.closest(".wrapper__is-completed").dataset.id
-    );
-    const completedTask = taskManager.handleCompletedTask(taskId);
-    if (completedTask) toggleTaskCompletion(e, completedTask);
-    renderTasks();
-    hideToolbar();
-    resetCounters();
+    completeTask(e);
     return;
   }
   if (e.target.closest(".action-buttons__handle-edit")) {
-    const taskId = Number(
-      e.target.closest(".action-buttons__handle-edit").dataset.id
-    );
-    const taskToEdit = taskManager.handleEditTask(taskId);
-    if (taskToEdit) {
-      const cleanedText = taskToEdit.text.replace(/\s*\(edited\)$/, "");
-      taskInput.textContent = cleanedText;
-      /* flip flag of the edited tasks to true so that we can find all of the edited tasks */
-      taskToEdit.showEditedTasks = !taskToEdit.showEditedTasks;
-    }
-    stateOfEdited.isEdited = taskId;
+    performEditTask(e, taskInput);
   }
   if (e.target.closest(".action-buttons__handle-copy")) {
-    const taskId = Number(
-      e.target.closest(".action-buttons__handle-copy").dataset.id
-    );
-    const taskTocopy = taskManager.handleCopyTask(taskId);
-    if (taskTocopy) displayVisualFeedback(e, taskTocopy);
-    setTimeout(() => {
-      hideToolbar(); // execute toolbar after 2 seconds so that check mark can show up as a feedback of copying action
-    }, 2000);
+    performCopyTask(e);
     return;
   }
   if (e.target.closest(".header__dark-mode-btn")) {
