@@ -17,6 +17,7 @@ const editIcon = (task) => {
 
   const editButton = document.createElement("button");
   editButton.classList.add("action-buttons__handle-edit");
+  editButton.disabled
   editButton.dataset.id = task.id;
 
   editButton.appendChild(editIcon);

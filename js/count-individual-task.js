@@ -1,9 +1,10 @@
 import { isTasksClearedOrCounted } from "./toggle-and-clear-tasks.js";
+import { editButtonState } from "./edit-button-state.js";
 
 export const state = {
   taskCounter: 0,
 };
-
+  
 export const updateTaskCounter = (e) => {
   const counterButton = document.querySelector(
     ".toolbar__count-individual-task"
@@ -26,8 +27,10 @@ export const updateTaskCounter = (e) => {
   }
   counterButton.textContent = state.taskCounter;
 
+  editButtonState(state.taskCounter)
   const tasksCounter = document.querySelector(".toolbar__count-total-tasks");
   if (!tasksCounter) return;
+
 
   const taskItems = document.querySelectorAll(".task-item");
 

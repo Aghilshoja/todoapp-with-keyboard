@@ -200,6 +200,11 @@ main,
   cursor: pointer;
 }
 
+.action-buttons__handle-edit:disabled, .action-buttons__handle-copy:disabled {
+  color: rgba(255, 255, 255, 0.21);
+  cursor: not-allowed;
+}
+
 .cancel-editing__icon {
     background: none;
   color: inherit;
