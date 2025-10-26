@@ -5,7 +5,11 @@ export const stateOfEdited = {
 };
 
 export const performEditTask = (e, taskInput) => {
-        const taskId = Number(
+  const cancelEditMode = document.querySelector('.cancel-editing')
+    if (!cancelEditMode) return
+  cancelEditMode.classList.add('cancel-editing--block')
+
+  const taskId = Number(
       e.target.closest(".action-buttons__handle-edit").dataset.id
     );
     const taskToEdit = taskManager.handleEditTask(taskId);
@@ -14,6 +18,6 @@ export const performEditTask = (e, taskInput) => {
       taskInput.textContent = cleanedText;
       /* flip flag of the edited tasks to true so that we can find all of the edited tasks */
       taskToEdit.showEditedTasks = !taskToEdit.showEditedTasks;
-    }
-    stateOfEdited.isEdited = taskId;
+        stateOfEdited.isEdited = taskId;
+    }  
 }
