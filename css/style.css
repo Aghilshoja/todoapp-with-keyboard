@@ -200,7 +200,7 @@ main,
   cursor: pointer;
 }
 
-.action-buttons__handle-edit:disabled, .action-buttons__handle-copy:disabled, .action-buttons__handle-delete:disabled {
+.action-buttons__handle-edit:disabled, .action-buttons__handle-copy:disabled, .action-buttons__handle-delete:disabled, .toolbar__clear-all-tasks:disabled {
   color: rgba(255, 255, 255, 0.21);
   cursor: not-allowed;
 }

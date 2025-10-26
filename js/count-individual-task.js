@@ -2,6 +2,7 @@ import { isTasksClearedOrCounted } from "./toggle-and-clear-tasks.js";
 import { editButtonState } from "./edit-button-state.js";
 import { copyButtonState } from "./copy-button-state.js";
 import { deleteButtonState } from "./delete-button.state.js";
+import { clearAllTasksState } from "./clear-all-tasks-state.js";
 
 export const state = {
   taskCounter: 0,
@@ -32,6 +33,7 @@ export const updateTaskCounter = (e) => {
   editButtonState(state.taskCounter)
   copyButtonState(state.taskCounter)
   deleteButtonState(state.taskCounter)
+  clearAllTasksState(state.taskCounter)
   
   const tasksCounter = document.querySelector(".toolbar__count-total-tasks");
   if (!tasksCounter) return;
