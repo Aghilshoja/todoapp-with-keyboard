@@ -12,6 +12,9 @@ export const submitTaskOnEnter = (e) => {
           value.taskInput.textContent = ''
         value.span.textContent = 'Enter a task'
         value.taskInput.appendChild(value.span)
+        const taskInput = document.querySelector('.cancel-editing')
+          if (!taskInput) return
+          taskInput.classList.remove('cancel-editing--block')
           renderTasks()
         hideToolbar()
 }

@@ -24,6 +24,7 @@ import { performEditTask } from "./perform-edit-task.js";
 import { performDeleteTasks } from "./handle-delete-tasks.js";
 import { performCopyTask } from "./perform-copy-task.js";
 import { submitTaskOnEnter } from "./add-task-on-enter-key.js";
+import { cancelEdit } from "./cancel-edit-task.js";
 import "./add-task.js";
 import "./get-tasks.js";
 import "./delete-mode.js";
@@ -138,5 +139,8 @@ document.body.addEventListener("click", (e) => {
   }
   if (e.target.classList.contains("dropdown-list__edited-tasks")) {
     showEditedTasks();
+  }
+  if (e.target.closest('.cancel-editing__icon')) {
+      cancelEdit(taskInput)
   }
 });

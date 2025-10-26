@@ -8,28 +8,28 @@
   /* === colors === */
   --primary-color: #f9fafb;
   --primary-bg: #f9fafb;
-  --black-color: black;
+  --black-color: black; 
   /* == bordes == */
-  --border-none: none;
+   --border-none: none; 
   /*== fonts ==*/
   --font-family: Arial, Helvetica, sans-serif;
-  --font-size: 1.4rem;
+  --font-size: 1.4rem; 
   /* ==background */
-  --background-none: none;
+   --background-none: none; 
   /*== header layout === */
-  --header-background-color: #21a99a;
+  --header-background-color: #21a99a; 
   /* ===== task input ======*/
-  --task-input-padding: 0.5rem;
+   --task-input-padding: 0.5rem; 
   /* == submit button == */
-  --submit-task-padding: 0.8rem;
+   --submit-task-padding: 0.8rem;
   --submit-task-radius: 50%;
-  --submit-task-background-color: rgba(70, 131, 180, 0.741);
+  --submit-task-background-color: rgba(70, 131, 180, 0.741); 
   /* == task item  == */
-  --task-item-margin: 0.5rem 1rem 0.5rem 1rem;
+   --task-item-margin: 0.5rem 1rem 0.5rem 1rem;
   --task-item-padding: 0.5rem 0.4rem 0.4rem 0.4rem;
   --task-item-background-color: #68a6a1;
   --task-item-radius: 20px;
-}
+} 
 
 body {
   display: flex;
@@ -81,29 +81,35 @@ main,
 
 
 .form-section__task-input {
+   border-radius: 6px; 
+
+    white-space: pre-wrap;   
+    word-wrap: break-word;
+     overflow-x: hidden;   
   flex-grow: 1;
   border: var(--border-none);
   border-bottom: 1px solid black;
   padding: var(--task-input-padding);
-  margin-bottom: 0.4rem;
+   margin-bottom: 0.4rem; 
   font-size: 1.6rem;
-  height: 40px;
-   overflow-y: auto;
-}
+  height: 40px; 
+   overflow-y: auto;   
 
-.dark-mode .form-section__task-input {
+} 
+
+ .dark-mode .form-section__task-input {
   border-bottom: 1px solid var(--primary-color);
   color: var(--primary-color);
-}
+} 
 
-/* make the tasks scrollable when their total height is more than 8dvh */
-.todo__tasks-holder {
+ /* make the tasks scrollable when their total height is more than 8dvh */
+ .todo__tasks-holder {
   height: 10dvh;
-  overflow-y: auto;
+   overflow-y: auto; 
   list-style: none;
-}
+} 
 /* each task */
-.task-item {
+ .task-item {
   background-color: var(--task-item-background-color);
   color: var(--primary-color);
   padding: var(--task-item-padding);
@@ -126,13 +132,25 @@ main,
 
 .sub-wrapper {
   display: flex;
-  gap: 0.4rem;
+    word-break: break-word;   
+  overflow-wrap: break-word;  /* allow browsers break the strings that have no space */
+  gap: 0.5rem;
 }
 
 .wrapper {
   display: flex;
   justify-content: space-between;
   padding-bottom: 0.4rem;
+}
+
+.wrapper__is-completed {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+}
+
+.wrapper__ellipsis-icon {
+  align-self: flex-start;
+  margin: 0.4rem 0 0 0.5rem;
 }
 
 .task-item__timestamp {
@@ -148,7 +166,7 @@ main,
 .dropdown-list,
 .dropdown-list__header,
 .virtual-keyboard__header,
-.toolbar {
+.toolbar, .cancel-editing {
   display: none;
 }
 
@@ -180,6 +198,14 @@ main,
   border: var(--border-none);
   font-size: var(--font-size);
   cursor: pointer;
+}
+
+.cancel-editing__icon {
+    background: none;
+  color: inherit;
+  border: var(--border-none);
+  cursor: pointer;
+  font-size: 1.1rem;
 }
 
 .action-buttons__ellipsis-icon {
@@ -231,6 +257,16 @@ main,
   display: block;
 }
 
+.cancel-editing--block {
+  display: flex;
+  background-color: rgba(128, 0, 128, 0.685);
+  padding: 0.6rem;
+  color: white;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.4rem;
+}
+
 .task-item--selected {
   background-color: #22bdab94;
 }
@@ -278,7 +314,7 @@ main,
 }
 
 /* show the dropdown list below the ellipsis icon  */
-.dropdown-list--render {
+ .dropdown-list--render {
   display: block;
   position: absolute;
   background-color: #21a99a;
@@ -307,11 +343,11 @@ main,
 
 .task-item--dragging {
   border: 4px solid yellowgreen;
-}
+} 
 
 /* virtual keyboard style */
 
-.virtual-keyboard__container__row-0,
+  .virtual-keyboard__container__row-0,
 .virtual-keyboard__container__row-1,
 .virtual-keyboard__container__row-2,
 .virtual-keyboard__container__row-3,
@@ -362,7 +398,7 @@ main,
 
 .virtual-keyboard__container__english,
 .virtual-keyboard__container__persian {
-  flex-grow: 2;
+  flex-grow: 2; 
 }
 
 .input-field__show-error {
@@ -383,7 +419,7 @@ main,
     border: var(--borders);
     position: absolute;
     right: 20px;
-    bottom: 84px;
+    bottom: 100px;
     padding: var(--submit-task-padding);
     border-radius: var(--submit-task-radius);
     background-color: var(--submit-task-background-color);
@@ -393,11 +429,11 @@ main,
   .virtual-keyboard__container {
     display: none;
   }
-}
+} 
 
 /* == height == */
 
-@media (min-height: 401px) {
+ @media (min-height: 401px) {
   .todo__tasks-holder {
     height: 27dvh;
   }
@@ -405,7 +441,7 @@ main,
 
 @media (min-height: 601px) {
   .todo__tasks-holder {
-    height: 40dvh;
+    height: 37dvh;
   }
   .virtual-keyboard__container__arrow-key,
   .virtual-keyboard__container__delete-key,
