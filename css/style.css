@@ -37,7 +37,9 @@ body {
   justify-content: space-between;
   height: 100dvh;
   font-family: var(--font-family);
-}
+  overflow: hidden;
+  transition: background 0.5s, color 0.6s;
+}  
 
 .header {
   display: flex;
@@ -94,7 +96,6 @@ main,
   font-size: 1.6rem;
   height: 40px; 
    overflow-y: auto;   
-
 } 
 
  .dark-mode .form-section__task-input {
@@ -163,10 +164,9 @@ main,
 .input-field__hide-error,
 .form-section__submit-task,
 .header__clear-value,
-.dropdown-list,
 .dropdown-list__header,
 .virtual-keyboard__header,
-.toolbar, .cancel-editing {
+.toolbar {
   display: none;
 }
 
@@ -262,14 +262,24 @@ main,
   display: block;
 }
 
-.cancel-editing--block {
-  display: flex;
+.cancel-editing {
+   display: flex; 
   background-color: rgba(128, 0, 128, 0.685);
   padding: 0.6rem;
   color: white;
   justify-content: space-between;
   align-items: center;
   font-size: 1.4rem;
+  opacity: 0;
+  transform: translateX(300px);
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.cancel-editing--block {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
 }
 
 .task-item--selected {
@@ -286,7 +296,6 @@ main,
 
 .dark-mode {
   background-color: var(--black-color);
-  transition: background 0.5s, color 0.6s;
 }
 
 .dark-mode .input-field__show-error {
@@ -302,11 +311,13 @@ main,
 .header__search-box {
   border: 1px solid var(--black-color);
   background-color: white;
-  flex-grow: 1;
   color: black;
   padding: 0.3rem;
   border-radius: 20px;
+    flex-grow: 1;
+  transition: flex-grow 0.4s;
 }
+
 
 .header__show-clear-value {
   display: block;
@@ -318,14 +329,24 @@ main,
   cursor: pointer;
 }
 
-/* show the dropdown list below the ellipsis icon  */
- .dropdown-list--render {
-  display: block;
+.dropdown-list {
+  list-style: none;
   position: absolute;
-  background-color: #21a99a;
-  top: 58px;
+  top: 56px;
   right: 0;
+  background-color: #21a99a;
+  border-radius: 6px;
+  opacity: 0;
+  transform: translate(100px);
+  transition: opacity 0.4s, transform 0.4s;
 }
+
+.dropdown-list--open {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
 
 .dropdown-list__all-tasks,
 .dropdown-list__completed-tasks,
