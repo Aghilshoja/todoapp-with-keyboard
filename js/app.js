@@ -73,7 +73,7 @@ taskInput.addEventListener('keydown', (e) => {
 document.body.addEventListener("click", (e) => {
   const dropdownList = document.querySelector(".dropdown-list");
   if (dropdownList) {
-    dropdownList.classList.remove("dropdown-list--render");
+    dropdownList.classList.remove("dropdown-list--open");
   }
   if (e.target.closest(".form-section__submit-task")) {
     submitTasks(e);
@@ -115,7 +115,12 @@ document.body.addEventListener("click", (e) => {
     localStorage.setItem("darkMode", JSON.stringify(darkMode));
   }
   if (e.target.closest(".header__search-btn")) {
-    const newSearchBox = replaceHeaderWithSearch();
+    const newSearchBox =  replaceHeaderWithSearch();
+    newSearchBox.classList.remove('header__search-box') 
+  
+    requestAnimationFrame(() => {
+    newSearchBox.classList.add("header__search-box");
+  });
     searchBox.isSearchBox = newSearchBox;
     setContentEditable(searchBox.isSearchBox); 
     return;
