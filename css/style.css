@@ -271,14 +271,15 @@ main,
   align-items: center;
   font-size: 1.4rem;
   opacity: 0;
-  transform: translateX(300px);
+  transform: scaleX(0);
   pointer-events: none;
-  transition: opacity 0.3s, transform 0.3s;
+  transform-origin: right;
+  transition: opacity 1s, transform 1s;
 }
 
 .cancel-editing--block {
   opacity: 1;
-  transform: translateX(0);
+  transform: scaleX(1);
   pointer-events: auto;
 }
 
@@ -337,13 +338,15 @@ main,
   background-color: #21a99a;
   border-radius: 6px;
   opacity: 0;
-  transform: translate(100px);
-  transition: opacity 0.4s, transform 0.4s;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: opacity 1s, transform 1s;
+  pointer-events: none;
 }
 
 .dropdown-list--open {
-  transform: translateX(0);
   opacity: 1;
+  transform: scaleX(1);
   pointer-events: auto;
 }
 
