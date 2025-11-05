@@ -4,7 +4,7 @@ import { stateOfInputs } from "./app.js";
   
  export const secondPlaceholder = document.querySelector('.span')
  
- function addInputHandler(button) {
+ const addInputHandler = (button) {
   button.addEventListener("click", () => {
     if (!stateOfInputs.activeInput) return;
     placeholder.textContent = "";
@@ -32,13 +32,13 @@ export const createElement = (chars, specialKey) => {
     // Numbers  aria label
   buttons.setAttribute("aria-label", `Number ${chars}`);
   buttons.textContent = chars; 
-  addInputHandler(buttons)
+   addInputHandler(button)
   } else {
     buttons.classList.add("virtual-keyboard__container__regular-buttons");
     //letters aria label
       buttons.setAttribute('aria-label', `key ${chars}`)
     buttons.textContent = chars;
-     addInputHandler(buttons)
+      addInputHandler(buttons)
   }
   return buttons;
 };
