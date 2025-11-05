@@ -11,17 +11,16 @@ export const app = {
       ],
       specialKeys: {
         " ": {
-          class: "fa-solid fa-arrow-up  virtual-keyboard__container__arrow-key",
+          class: "fa-solid fa-arrow-up  virtual-keyboard__container__arrow-key", label: 'Shift key, capitalize letters'
         },
         "": {
           class:
-            "fa-solid fa-delete-left virtual-keyboard__container__delete-key",
+            "fa-solid fa-delete-left virtual-keyboard__container__delete-key", label: 'backspace key'
         },
-        "!#1": { class: "virtual-keyboard__container__symbol-switcher" },
-        "English (US)": { class: "virtual-keyboard__container__english" },
-        space: { class: "virtual-keyboard__container__space-button" },
-        Done: {
-          class: "virtual-keyboard__container__submit-button",
+        "!#1": { class: "virtual-keyboard__container__symbol-switcher", label: 'Switch to symbols' },
+        "English (US)": { class: "virtual-keyboard__container__english",  label: 'Current language English. Switch to Persian keyboard.'},
+        space: { class: "virtual-keyboard__container__space-button", label: 'space key'},
+           Done: { class: "virtual-keyboard__container__submit-button", label: 'Enter key, submit input'
         },
       },
     },
@@ -35,16 +34,16 @@ export const app = {
       ],
       specialKeys: {
         " ": {
-          class: "fa-solid fa-arrow-up  virtual-keyboard__container__arrow-key",
+          class: "fa-solid fa-arrow-up  virtual-keyboard__container__arrow-key", label: 'Shift key, capitalize letters'
         },
         "": {
           class:
-            "fa-solid fa-delete-left virtual-keyboard__container__delete-key",
+            "fa-solid fa-delete-left virtual-keyboard__container__delete-key", label: 'backspace key'
         },
-        "!#1": { class: "virtual-keyboard__container__symbol-switcher" },
-        "فارسی (Persian)": { class: "virtual-keyboard__container__persian" },
-        space: { class: "virtual-keyboard__container__space-button" },
-        Done: { class: "virtual-keyboard__container__submit-button" },
+        "!#1": { class: "virtual-keyboard__container__symbol-switcher", label: 'Switch to symbols' },
+        "فارسی (Persian)": { class: "virtual-keyboard__container__persian", label: 'Current language Persian. Switch to English keyboard.' },
+        space: { class: "virtual-keyboard__container__space-button", label: 'space key'},
+        Done: { class: "virtual-keyboard__container__submit-button", label: 'Enter key, submit input' },
       },
     },
     symbols: {
@@ -57,16 +56,16 @@ export const app = {
       ],
       specialKeys: {
         "": {
-          class: "fa-solid fa-arrow-up virtual-keyboard__container__arrow-key",
+          class: "fa-solid fa-arrow-up virtual-keyboard__container__arrow-key", label: 'Shift key, capitalize letters'
         },
         " ": {
           class:
-            "fa-solid fa-delete-left virtual-keyboard__container__delete-key",
+            "fa-solid fa-delete-left virtual-keyboard__container__delete-key", label: 'backspace key'
         },
-        ABC: { class: "virtual-keyboard__container__reverse-switcher" },
+        ABC: { class: "virtual-keyboard__container__reverse-switcher", label: 'switch to the English' },
         "English (US)": { class: "virtual-keyboard__container__english" },
-        space: { class: "virtual-keyboard__container__space-button" },
-        Done: { class: "virtual-keyboard__container__submit-button" },
+        space: { class: "virtual-keyboard__container__space-button", label: 'space key'},
+        Done: { class: "virtual-keyboard__container__submit-button", label: 'Enter key, submit input'},
       },
     },
   },

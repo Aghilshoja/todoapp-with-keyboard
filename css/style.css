@@ -68,26 +68,32 @@ body {
 main,
 .virtual-keyboard,
 .form-section,
-.input-field {
+.task-entry {
   display: contents;
 }
 
 /* Accessibility: visually hidden elements */
-.todo__section-title,
-.input-field__section-title,
-.form-section__hidden-label,
-.toolbar__action-btns {
+.todo__header, .dropdown-list__header,
+.virtual-keyboard__header,
+.task-entry__header,
+.form-section__hidden-label, .toolbar__header {
   position: absolute;
-  left: -1000px;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 
 .form-section__task-input {
    border-radius: 6px; 
-
     white-space: pre-wrap;   
-    word-wrap: break-word;
-     overflow-x: hidden;   
+  word-wrap: break-word;
+   overflow-x: hidden;   
   flex-grow: 1;
   border: var(--border-none);
   border-bottom: 1px solid black;
@@ -161,13 +167,15 @@ main,
 
 .action-buttons,
 .action-buttons__check-mark,
-.input-field__hide-error,
+.task-entry__hide-error,
 .form-section__submit-task,
 .header__clear-value,
-.dropdown-list__header,
-.virtual-keyboard__header,
 .toolbar {
-  display: none;
+display: none;
+}
+
+.toolbar__clear-all-tasks, .wrapper__ellipsis-icon, .header__back-arrow {
+  border: var(--border-none);
 }
 
 .action-buttons__check-mark,
@@ -178,7 +186,6 @@ main,
 .header__back-arrow {
   background: var(--background-none);
   color: inherit;
-  border: var(--border-none);
   font-size: var(--font-size);
   cursor: pointer;
 }
@@ -299,7 +306,7 @@ main,
   background-color: var(--black-color);
 }
 
-.dark-mode .input-field__show-error {
+.dark-mode .task-entry__hide-error {
   color: var(--primary-color);
 }
 
@@ -350,12 +357,18 @@ main,
   pointer-events: auto;
 }
 
+.dropdown-list__show-status {
+  list-style: none;
+}
 
 .dropdown-list__all-tasks,
 .dropdown-list__completed-tasks,
 .dropdown-list__edited-tasks {
   padding: 1rem;
-  list-style: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  border: var(--border-none);
   color: var(--primary-color);
 }
 
@@ -430,7 +443,7 @@ main,
   flex-grow: 2; 
 }
 
-.input-field__show-error {
+.task-entry__show-error {
   display: block;
   color: red;
   font-size: 1.5rem;
