@@ -17,8 +17,8 @@ import { setContentEditable } from "./input-mode-controller.js";
 import { loadTasks } from "./save-tasks-to-local-storage.js";
 import { renderTasks } from "./render-tasks.js";
 import { loadDarkMode } from "./save-dark-mode-to-loacal-storage.js";
-import { showEditedTasks } from "./filter-completed-tasks.js";
-import { renderCompletedTasks } from "./filter-completed-tasks.js";
+import { showEditedTasks } from "./render-tasks-by-filter.js";
+import { renderCompletedTasks } from "./render-tasks-by-filter.js";
 import { toggleAndClearTasks } from "./toggle-and-clear-tasks.js";
 import { performEditTask } from "./perform-edit-task.js";
 import { performDeleteTasks } from "./handle-delete-tasks.js";
@@ -33,7 +33,7 @@ import "./edit-mode.js";
 import "./copy-mode.js";
 import "./completed-mode.js";
 import "./search-mode.js";
-import "./show-completed-tasks-mode.js";
+import "./filter-tasks.js"
 
 export const taskManager = new toDoApp();
 

@@ -127,7 +127,7 @@ main,
 
 .no-task-added,
 .no-searched-tasks,
-.no-completed-tasks {
+.no-completed-tasks, .no-edited-tasks {
   background-color: antiquewhite;
   margin: 2rem 2rem 0 2rem;
   list-style: none;
@@ -533,7 +533,7 @@ display: none;
   }
   .no-completed-tasks,
   .no-searched-tasks,
-  .no-task-added {
+  .no-task-added, .no-edited-tasks {
     font-size: 1.4rem;
   }
   .wrapper__is-completed {
