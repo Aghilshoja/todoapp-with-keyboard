@@ -41,7 +41,7 @@ const checkMarkIcon = () => {
   const checkMark = document.createElement("i");
   checkMark.className = "fa-solid fa-check";
 
-  const checkMarkHolder = document.createElement("button");
+  const checkMarkHolder = document.createElement("span");
   checkMarkHolder.classList.add("action-buttons__check-mark");
 
   checkMarkHolder.appendChild(checkMark);

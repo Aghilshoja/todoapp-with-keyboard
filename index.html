@@ -40,41 +40,41 @@
       </header>
       <!-- tied to do list to the header so that the todo list remains right below the header when display: flex; and justify-content: space-between; applied -->
       <section class="todo">
-        <h2 class="todo__section-title">your tasks</h2>
+        <h2 class="todo__header">your tasks</h2>
         <ul class="todo__tasks-holder"></ul>
       </section>
     </div>
 
     <main>
-      <section class="dropdown-list">
-        <h2 class="dropdown-list__header">
-          hide or show drop-down list based on state
+    <section class="dropdown-list">
+     <h2 class="dropdown-list__header">filter tasks and render your edited/completed ones
         </h2>
-        <ul class="dropdown-list__show-status">
-          <li class="dropdown-list__all-tasks">all tasks</li>
-          <li class="dropdown-list__completed-tasks">completed tasks</li>
-          <li class="dropdown-list__edited-tasks">edited tasks</li>
-        </ul>
-      </section>
+  <ul class="dropdown-list__show-status">
+    <li><button class="dropdown-list__all-tasks" aria-label="render all tasks including edited, and completed ">All tasks</button></li>
+    <li><button class="dropdown-list__completed-tasks" aria-label="render all completed tasks">Completed tasks</button></li>
+    <li><button class="dropdown-list__edited-tasks" aria-label="render all edited tasks">Edited tasks</button></li>
+  </ul>
+</section>
+
       <section class="toolbar">
-        <h2 class="toolbar__action-btns">
+        <h2 class="toolbar__header">
           perform deletion, counting tasks while deleting them
         </h2>
-        <button class="toolbar__count-individual-task"></button>
-        <button class="toolbar__count-total-tasks"></button>
-        <button class="toolbar__clear-all-tasks">
+        <span class="toolbar__count-individual-task"></span>
+        <span class="toolbar__count-total-tasks"></span>
+        <button class="toolbar__clear-all-tasks" aria-label="delete all of your tasks at once">
           <i class="fa-solid fa-broom"></i>
         </button>
       </section>
       <div>
-        <section class="input-field">
-          <h2 class="input-field__section-title">
+        <section class="task-entry">
+          <h2 class="task-entry__header">
             input fields to enter tasks
           </h2>
-          <div class="input-field__hide-error"></div>
+          <div class="task-entry__hide-error"></div>
           <form class="form-section">
             <!-- used a div element instead of an input since the input triggers your phone keyboard, and that does not let you use the built-in keyboard of the app properly -->
-              <div class="cancel-editing"><span>Edit task</span><button type="button" class="cancel-editing__icon"><i class="fa-solid fa-circle-xmark"></i></button></div>
+              <div class="cancel-editing"><span>Edit task</span><button type="button" class="cancel-editing__icon" aria-label="cancel edting your task"><i class="fa-solid fa-circle-xmark"></i></button></div>
               <div
                 tabindex="0"
                 role="textbox"
@@ -83,7 +83,7 @@
                 aria-label="enter a task in input field"
               ><span class="span">Enter a task</span></div>
       
-            <button class="form-section__submit-task">
+            <button class="form-section__submit-task" aria-label="add a task to your to do list">
               <i class="fa-solid fa-paper-plane"></i>
             </button>
           </form>
